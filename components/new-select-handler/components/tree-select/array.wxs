@@ -1,0 +1,20 @@
+function isArray(array) {
+  return array && array.constructor === 'Array';
+}
+
+function filterNum(array, filterArr){
+  var num = 0
+  if(!isArray(array) || !isArray(filterArr)){
+    return 0
+  }else {
+    array.forEach(function (item) {
+      if(filterArr.indexOf(item.userId) != -1){
+        num = ++num
+      }
+    })
+    return num
+  }
+}
+
+module.exports.isArray = isArray;
+module.exports.filterNum = filterNum;

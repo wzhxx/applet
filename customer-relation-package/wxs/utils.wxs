@@ -1,0 +1,15 @@
+
+
+// 判断是否不小于0
+function positiveNumber(num) {
+  return +num >= 0 ? true : false
+}
+// 数组分割
+function arrayJoin(arr, str) {
+  return (arr||[]).join(str)
+}
+
+module.exports = {
+  positiveNumber: positiveNumber,
+  arrayJoin: arrayJoin
+}

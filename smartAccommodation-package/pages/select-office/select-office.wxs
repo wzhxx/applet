@@ -1,0 +1,13 @@
+function getTxt(chooseObj, curType, selectOrder){
+  var index = selectOrder.indexOf(curType);
+  var prevType = selectOrder[index - 1];
+  if(prevType && chooseObj[prevType]){
+    return chooseObj[prevType].title
+  }else {
+    return ''
+  }
+}
+
+module.exports = {
+  getTxt: getTxt
+}

@@ -1,0 +1,24 @@
+<import src="/static/templates/template.wxml"></import>
+<custom-popup 
+  isRound
+  position="bottom" 
+  title="选择工单分类" 
+  isShowPopup="{{show}}" 
+  popup_header_class="type_header"
+  isCloseOnClickOverlay="{{false}}"
+  bind:hidePopup="close"
+>
+  <view class="type_con">
+    <block wx:if="{{typeList.length}}">
+      <view class="item {{currTypeId === item.id && 'active'}}" wx:for="{{typeList}}" wx:key="id" data-item="{{item}}" bind:tap="selectType">
+        <image class="type_img" src="{{item.serviceFlowIcon}}" />
+        <view class="con">
+          <view class="title {{currTypeId === item.id && 'themeColor'}}">{{item.serviceFlowAlias || ''}}</view>
+          <view wx:if="{{item.remark}}" class="desc {{currTypeId === item.id && 'themeColor'}}">{{item.remark || ''}}</view>
+        </view>
+        <i wx:if="{{currTypeId === item.id}}" class="new-iconfont icon-comfirm themeColor"></i>
+      </view>
+    </block>
+    <template wx:else is="emptyData" data="{{newImgUrl}}"></template>
+  </view>
+</custom-popup>

@@ -1,0 +1,146 @@
+<import src="../../../static/templates/template.wxml"></import>
+<wxs src="../../wxs/index.wxs" module="orderWxs" />
+<view class="daily_quality_inspection_detail {{ orderWxs.checkStatus(curType,detailObj) ? 'jujue_bg' : 'normal_bg'}}">
+  <mp-navigation-bar id="navigation" back="{{false}}" style="z-index: 1;"
+  background="{{ orderWxs.checkStatus(curType,detailObj) ? 'var(--blueAshes)' : appStyle.themeColor}} {{}}">
+    <view slot="left" bind:tap="backFunc" class="nav_left tint">
+      <i class="new-iconfont icon-back2" style="font-size: 44rpx;margin-right: 24rpx;"></i>
+    </view>
+  </mp-navigation-bar>
+  <view class="resouce_box">
+      <view>
+      <!-- 3 5 整改单 -->
+      <view class="status_box">
+        <view class="status">
+          {{curType == 3 || curType == 5 ? checkStatusList[detailObj.status] : rectStatusList[detailObj.status]}}
+        </view>
+        <van-tag wx:if="{{detailObj.isSupervise == 1}}" class="tag_class" color="var(--yellow)">一级督办</van-tag>
+      </view>
+        <view class="resouce_info" bindtap="handleTapCopy" wx:if="{{curType == 3 || curType == 5}}">
+          编号：{{detailObj.rectCode || ''}}
+          <i style="margin-left: 8rpx;" class="new-iconfont icon-copy2"></i>
+        </view>
+        <view class="resouce_info" bindtap="handleTapCopy" wx:if="{{curType != 3 && curType != 5}}">
+          编号：{{detailObj.dqiInfoCode || ''}}
+          <i style="margin-left: 8rpx;" class="new-iconfont icon-copy2"></i>
+        </view>
+      </view>      
+      <view class="resouce_guide" bindtap="handleGuiLine" wx:if="{{curType == 3 || curType == 5}}">
+        <!-- <image wx:if="{{detailObj.status == 1}}" src="{{newImgUrl}}guiji12.png"></image> -->
+        <image wx:if="{{orderWxs.checkStatus(curType,detailObj)}}" src="{{newImgUrl}}guiji3.png"></image>
+        <image wx:else src="{{newImgUrl}}guiji.png"></image>
+        <text>轨迹</text>
+      </view>
+    </view>
+    <!-- 日检单 -->
+    <view class="content_box" wx:if="{{curType != 3 && curType != 5}}">
+      <view class="tent_title">日检单信息</view>
+        <detail-item key="所属组织" value="{{detailObj.organizationName}}" leftIcon="icon-mold"></detail-item>
+        <detail-item key="提交时间" value="{{detailObj.submitTime}}" leftIcon="icon-time"></detail-item>
+        <detail-item key="检查人姓名" value="{{detailObj.inspectionUser}}" leftIcon="icon-people"></detail-item>
+        <detail-item key="检查人部门" value="{{detailObj.inspectionUserOrg}}" leftIcon="icon-org"></detail-item>
+        <detail-item key="检查人职位" value="{{detailObj.inspectionUserPos}}" leftIcon="icon-people1"></detail-item>
+      <view class="tent_title handle_qus">被检查人员列表</view>
+      <view class="track_box">
+        <detail-track trackList="{{trackList}}" statusProp="{{'status'}}" classMap="{{classMap }}" sortProp="{{'sort1'}}">
+            <view slot="right{{index}}" wx:for="{{trackList}}" wx:for-item="item" wx:key="rightindex" 
+            data-item="{{item}}"
+            data-index="{{index}}"
+             bindtap="handeleListItem">
+              <view class="list_item">
+                    <view class="item_left">
+                      <view class="name">
+                        <view class="new-iconfont icon-people"></view>
+                        <view>{{item.userName}}</view>
+                      </view>
+                      <view class="sub_label">
+                        <view class="sub_title">所属部门</view>
+                        <view class="sub_value">{{item.userOrgName}}</view>
+                      </view>
+                      <view class="sub_label number">
+                        <view class="sub_title">部门人数</view>
+                        <view class="sub_value">{{item.userOrgNum}}</view>
+                      </view>
+                    </view>
+                    <view class="item_right">
+                      <view class="right_bottom">
+                        <view class="status {{item.checkStatus == 1 ? 'success_status' : 'error_status'}}">
+                          {{item.checkStatus == 1 ? '正常': '异常'}}
+                        </view>
+                        <i class="new-iconfont icon-arrowRight"></i>
+                      </view>
+                    </view>
+                  </view>
+            </view>
+        </detail-track>
+      </view>
+    </view>
+     <!-- 3 5 整改单 -->
+    <view class="content_box" wx:if="{{curType == 3 || curType == 5}}">
+      <view class="tent_title">工单信息</view>
+        <detail-item key="所属组织" value="{{detailObj.organizationName}}" leftIcon="icon-mold"></detail-item>
+        <detail-item key="关联日检单" value="{{detailObj.dqiInfoCode}}" leftIcon="icon-system1" rightIcon="icon-copy2" bind:itemTap="handleTapCopy"></detail-item>
+        <detail-item key="问题提交时间" value="{{detailObj.createTime}}" leftIcon="icon-time"></detail-item>
+        <detail-item key="被检查人姓名" value="{{detailObj.checkUserName}}" leftIcon="icon-people"></detail-item>
+        <detail-item key="被检查人部门" value="{{detailObj.checkUserDept}}" leftIcon="icon-org"></detail-item>
+        <detail-item key="被检查人职位" value="{{detailObj.checkUserPosition}}" leftIcon="icon-people1"></detail-item>
+        <detail-item key="整改期限（天）" value="{{detailObj.rectTerm}}" leftIcon="icon-time"></detail-item>
+        <detail-item key="整改责任人" value="{{detailObj.rectResponsible}}" leftIcon="icon-user"></detail-item>
+        <detail-item key="整改完成时间" value="{{detailObj.rectCompleteDate}}" leftIcon="icon-time-2" isBorder="{{false}}"></detail-item>
+      <view class="tent_title handle_qus">整改问题</view>
+      <view class="track_box">
+        <detail-track trackList="{{trackList}}" statusProp="{{'status'}}" classMap="{{classMap }}" sortProp="{{'sort1'}}">
+            <view slot="right{{index}}" wx:for="{{trackList}}" wx:for-item="item" wx:key="rightindex" 
+            data-item="{{item}}"
+            data-index="{{index}}"
+            bindtap="handleEditItemDetail">
+                  <view class="content_top">
+                    <view class="content_top_left">
+                      <i class="new-iconfont icon-document-2"></i>
+                      <view class="left_title">{{item.checkName}}</view>
+                    </view>
+                    <view class="content_top_right">
+                      <view class="right_title {{item.exStatus == 0 ? 'normal_status' : 'editSuccess_status'}}">
+                        {{checkStatusList[item.exStatus]}}
+                      </view>
+                      <i class="new-iconfont icon-arrowRight"></i>
+                    </view>
+                  </view>
+                  <view class="content_lable">{{item.checkReason}}</view>
+            </view>
+        </detail-track>
+      </view>
+    </view>
+   
+      <view class="white_block"></view>
+      <view class="btn_box" wx:if="{{(curType == 3 || curType == 5) && !listItemData.messageFlag}}">
+        <template  wx:if="{{detailObj.status == 0 && detailObj.rectResponsible == loginUserName}}" is="bigBtn" data="{{extClass: checkSuccess ? '': 'add_person', btnText: '完成', bigBtnTap: 'handleAdd'}}"></template>
+      </view>
+      <view class="btn_box" wx:else>
+        <template wx:if="{{listItemData.isRead == '0' && listItemData.messageFlag == '1'}}" 
+        is="bigBtn" data="{{btnText: '督办', bigBtnTap: 'handleSupervise'}}"></template>
+        <template wx:if="{{listItemData.isRead == '0' && listItemData.messageFlag == '0'}}" 
+        is="bigBtn" data="{{btnText: '已阅', bigBtnTap: 'handleReview'}}"></template>
+      </view>
+      <trajectory wx:if="{{showTrajectory}}" show="{{showTrajectory}}" bind:close="closeTrajectory" title="工单轨迹" steps="{{steps}}"></trajectory>
+      <custom-popup wx:if="{{showSupervise}}" isShowPopup="{{showSupervise}}" 
+      title="督办" 
+      isRound="{{true}}" 
+      customStyle="height:auto;max-height:40%"
+      bindhidePopup="onSuperviseClose">
+        <view class="supervise_box">
+          <textarea 
+            data-index="{{index}}"
+            class="font15 dark" 
+            value="{{superviseRemark}}"
+            style="width: 100%;"  
+            placeholder-class="form_textarea_placeholder" 
+            maxlength="200"
+            bindinput="changeCheckRemark" 
+            placeholder="请输入原因">
+              <text class="form_textarea_txt font12 dark40">{{superviseRemarkCount}}</text>
+          </textarea>
+        </view>
+        <template is="bigBtn" data="{{ btnText: '确定', bigBtnTap: 'handleAddSuperviseCasue'}}"></template>
+      </custom-popup>
+  </view>

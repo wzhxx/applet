@@ -1,0 +1,80 @@
+.text_overflow{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.complete_con{
+  background: var(--tint);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  /* padding-top: 120rpx; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.status_box{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.status_box image{
+  width: 120rpx;
+  height: 120rpx;
+}
+.status_box .txt{
+  font-size: var(--fontSize18);
+  font-weight: var(--fontWeight600);
+  margin-top: var(--margin16);
+}
+.desc_box{
+  margin: var(--margin40) var(--margin);
+  padding: var(--margin);
+  background: var(--bgColor);
+  border-radius: var(--borderRadius);
+}
+.desc_box .key_val{
+  padding: var(--margin16) 0;
+}
+.desc_box .key_val .key, .val{
+  font-size: var(--fontSize12);
+}
+.desc_box .key,
+.desc_box .val{
+  color: var(--dark);
+}
+.desc_box .key{
+  flex: none;
+}
+.desc_box .val{
+  margin-left: var(--margin);
+}
+.desc_box .val .icon_txt{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: var(--margin);
+}
+.desc_box .val i{
+  margin-left: var(--margin8);
+}
+.go_detail{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 64rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--fontSize12);
+  color: var(--dark);
+}
+.go_detail i{
+  font-size: var(--fontSize13);
+  margin-left: var(--margin8);
+}
+.no_border{
+  border-bottom: 0;
+}

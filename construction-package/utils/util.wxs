@@ -1,0 +1,130 @@
+function formatDateTime(datetimeStr) {
+    var datetimeRegexp = getRegExp('\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}');
+    var result = {
+        date: '',
+        time: ''
+    };
+    if (datetimeRegexp.test(datetimeStr)) {
+        var tmpArr = datetimeStr.split(' ');
+        result = {
+            date: tmpArr[0],
+            time: tmpArr[1].substring(0, 5)
+        };
+    }
+    return result;
+}
+
+function includesPass(statusNum) {
+    var array = [1, 5, 11, 16, 17, 18]
+    return array.indexOf(statusNum) > -1
+}
+
+function includesCancel(statusNum) {
+    var array = [16, 17, 18]
+    return !(array.indexOf(statusNum) > -1)
+}
+
+function includesApple(statusNum) {
+    var array = [2, 6, 7, 8, 13, 14, 15]
+    return array.indexOf(statusNum) > -1
+}
+
+function addEmp(statusNum) {
+    var array = [2, 3, 4, 6, 7, 8, 13, 14]
+    return array.indexOf(statusNum) > -1
+}
+
+function leave(statusNum) {
+    var array = [2, 6, 7, 8, 13, 14, 15]
+    return array.indexOf(statusNum) > -1
+}
+
+function delay(statusNum) {
+    var array = [2, 6, 7, 8, 13, 14, 15]
+    return array.indexOf(statusNum) > -1
+}
+
+function delayListBut(statusNum) {
+    var array = [2, 6, 7, 8, 13, 14]
+    return array.indexOf(statusNum) > -1
+}
+
+function personnelBottom(statusNum) {
+    var array = [0, 4, 8, 14, 15, 16]
+    return array.indexOf(statusNum) > -1
+}
+
+function personnelCancel(statusNum) {
+    var array = [15, 16]
+    return array.indexOf(statusNum) > -1
+}
+
+function securityLogBottom(statusNum) {
+    var array = [0, 2, 3, 4, 6, 7, 8, 13, 14]
+    return array.indexOf(statusNum) > -1
+}
+
+function employeeCheck(statusNum) {
+    var array = [1, 5, 6, 7, 10, 11, 13]
+    return array.indexOf(statusNum) > -1
+}
+
+/**
+ * 格式化施工作业状态
+ */
+function formatWorkStatus(val) {
+    var obj = [
+        "已取消",
+        "待一级审批",
+        "待二级审批",
+        "审批驳回",
+        "审核通过"
+    ]
+    return obj[val]
+}
+
+function filterFileName(fileName, len = 26) {
+    if (fileName && fileName.length > len) {
+        return fileName.substring(0, len) + "..."
+    }
+    return fileName
+}
+/**
+ * 字符串截取
+ * @param {需要截取的字符串} str 
+ * @param {根据什么格式截取} format 
+ * @param {需要获取第几个} index 
+ */
+function strSplit(str, format = " ", index = null) {
+    if (str) {
+        var arr = str.split(format)
+        //如果存在
+        if (index >= 0) {
+            if (arr.length > index) {
+                return arr[index]
+            }
+            return ""
+        } else {
+            return arr
+        }
+    }
+    return ""
+}
+
+module.exports = {
+    formatDateTime: formatDateTime,
+    includesPass: includesPass,
+    includesCancel: includesCancel,
+    includesApple: includesApple,
+    addEmp: addEmp,
+    leave: leave,
+    delay: delay,
+    personnelBottom: personnelBottom,
+    personnelCancel: personnelCancel,
+    securityLogBottom: securityLogBottom,
+    employeeCheck: employeeCheck,
+    delayListBut: delayListBut,
+    formatWorkStatus: formatWorkStatus,
+    filterFileName: filterFileName,
+    strSplit: strSplit,
+}

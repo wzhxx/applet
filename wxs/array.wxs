@@ -1,0 +1,131 @@
+// 医辅管理（pages/paramedical-manage/paramedical-manage）
+function isHaveIndex(array, index) {
+  var isChoose
+  if (array.indexOf(index) != -1) {
+      isChoose = true
+  } else {
+      isChoose = false
+  }
+  return isChoose
+};
+
+function findIndex(array, index) {
+return array.indexOf(index)
+}
+
+function isArray(array) {
+  return array && array.constructor === 'Array';
+}
+
+function isArrsEqual(arr1, arr2){
+  return arr1.sort().toString() == arr2.sort().toString() 
+}
+
+function isIncludes(arr, str){
+  if(!isArray(arr)) return
+  return arr.includes(str)
+}
+
+function arrSplice(arr,index,howmany,item){
+
+}
+function whitchIcon(tab){
+  var iconToggle = {
+      group: 'icon-group',
+      groupRole: 'icon-group',
+      departmentRole: 'icon-department1',
+      station: 'icon-position',
+  };
+  return iconToggle[tab]
+}
+
+
+//模块过滤
+function filterModule (list,unDevelopCode) {
+  console.log(typeof unDevelopCode)
+  var newList = list.filter(function filterFunc(item) {
+      return !unDevelopCode.includes(item.serviceCode)
+  })
+  return newList
+}
+
+function arrSlice(arr,start,end){
+  return arr.slice(start,end)
+}
+
+
+function arrJoin(arr, str) {
+  return arr.join(str)
+};
+
+function arrFindIndex(arr, item, compareItem){
+  // let index = arr.findIndex(() => {
+  //     return compareItem == item
+  // })
+  // return index
+}
+// 客户考核 状态处理
+function assessStatus(key){
+  var list = {
+      '101': "待保存",
+      '102': "草稿",
+      '103': "待派单",
+      '104': "待处理",
+      '105': "已撤销",
+      '106': "已完成",
+  }
+  return list[key+''] || ""
+}
+// 客户考核 状态处理
+function visitStatus(key){
+  var list = {
+      '1': "待处理",
+      '2': "已完成",
+      '3': "已取消",
+  }
+  return list[key+''] || ""
+}
+// 智慧住宿 申请单处理状态
+function stayStatus(key){
+  var list = {
+      '1': "待确认",
+      '2': "已确认",
+      '3': "已取消",
+  }
+  return list[key+''] || ""
+}
+// 智慧住宿 申请单状态
+function stayRoomStatus(key){
+  var list = {
+      '1': "换房申请",
+      '2': "续住申请",
+      '3': "房间预定",
+      '4': "退宿申请",
+  }
+  return list[key+''] || ""
+}
+// 智慧住宿 申请单图标
+function stayRoomStatusIcon(key){
+  var list = {
+      '1': "room_change.png",
+      '2': "room_overstay.png",
+      '3': "room_reserve.png",
+      '4': "room_checkout.png",
+  }
+  return list[key+''] || ""
+}
+module.exports = {
+  isHaveIndex: isHaveIndex,
+  findIndex: findIndex,
+  whitchIcon: whitchIcon,
+  arrJoin: arrJoin,
+  isIncludes: isIncludes,
+  arrSlice: arrSlice,
+  filterModule: filterModule,
+  assessStatus: assessStatus,
+  isArrsEqual: isArrsEqual,
+  visitStatus: visitStatus,
+  stayStatus: stayStatus,
+  stayRoomStatus: stayRoomStatus,
+  stayRoomStatusIcon: stayRoomStatusIcon,
+}

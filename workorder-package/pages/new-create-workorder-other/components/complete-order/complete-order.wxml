@@ -1,0 +1,49 @@
+<import src="/static/templates/template.wxml"></import>
+<custom-popup 
+  position="bottom" 
+  isShowPopup="{{show}}" 
+  isShowClose="{{false}}"
+  customStyle="height: 100%;"
+  popup_header_class="no_border"
+  isCloseOnClickOverlay="{{false}}"
+  bind:hidePopup="close"
+>
+  <view class="complete_con">
+    <view class="status_box">
+      <image src="{{newImgUrl}}{{statusIco}}" />
+      <view class="txt">{{statusTxt}}</view>
+    </view>
+    <view class="desc_box">
+      <view class="key_val">
+        <view class="key">创建时间</view>
+        <view class="val">{{orderInfo.sendTime}}</view>
+      </view>
+      <view class="key_val">
+        <view class="key">工单编号</view>
+        <view class="val">
+          <view class="icon_txt">
+            <view class="txt text_overflow">{{orderInfo.workOrderNo}}</view>
+            <i class="new-iconfont icon-copy2 dark40" bind:tap="handleCopy"></i>
+          </view>
+        </view>
+      </view>
+      <view class="key_val">
+        <view class="key">工单类型</view>
+        <view class="val">{{orderInfo.orderLargerTypeName}}</view>
+      </view>
+      <view class="key_val">
+        <view class="key">服务类型</view>
+        <view class="val">{{orderInfo.orderOtherTypeName}}</view>
+      </view>
+      <view class="key_val">
+        <view class="key">下一处理人</view>
+        <view class="val">{{nextHandlerTxt}}</view>
+      </view>
+    </view>
+    <template is="multiBtn" data="{{btnArr: [{btnText: '创建新工单',extClass: 'light_btn', btnTap: 'newAgain'},{btnText: '完成', btnTap: 'goDetail'}]}}"></template>
+    <view class="go_detail" bind:tap="goDetail">
+      <view class="txt">工单详情</view>
+      <i class="new-iconfont icon-arrowRight dark40"></i>
+    </view>
+  </view>
+</custom-popup>

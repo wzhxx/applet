@@ -1,0 +1,14 @@
+function strSplitTime(value, type) {
+  if (type == "y") {
+    return value.split(' ')[0]
+  } else if (type == "h") {
+    return value.split(' ')[1].split(':')[0]
+  } else if (type == "m") {
+    return value.split(' ')[1].split(':')[1]
+  }else if (type == "s") {
+    return value.split(' ')[1].split(':')[2]
+  }
+}
+module.exports = {
+  strSplitTime: strSplitTime,
+}

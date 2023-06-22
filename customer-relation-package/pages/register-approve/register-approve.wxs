@@ -1,0 +1,13 @@
+function getStatusText(code) {
+  if (!code) return '';
+  var statusMap = {
+    '1': '待审批',
+    '2': '驳回',
+    '3': '通过'
+  }
+  return statusMap[code.toString()]
+}
+
+module.exports = {
+  getStatusText: getStatusText
+}

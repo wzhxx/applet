@@ -1,0 +1,20 @@
+// 客户关系权限配置
+// 配合import { hathCode } from "../../utils/hathCode.js"
+/**
+ * code 动作属性
+ * array hathCode方法处理后的数据
+ */
+
+function hasAuthCode(array, code) {
+  var isHas = false;
+  for (var i = 0; i < array.length; ++i) {
+    if (array[i].indexOf('customer-relation-package.pages.customer-assess.customer-assess.' + code) > -1) {
+      isHas = true
+    }
+  }
+  return isHas
+}
+
+module.exports = {
+  hasAuthCode: hasAuthCode
+}

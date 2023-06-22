@@ -1,0 +1,173 @@
+function alarmTypeName(data) {
+  if (data === "") return;
+  if (data == 0) {
+    return "设备离线"
+  } else if (data == 1) {
+    return "变量超限"
+  } else if (data == 2) {
+    return "开关变位"
+  } else if (data == 3) {
+    return "用量超限"
+  } else if (data == 4) {
+    return "网关离线"
+  }
+}
+function meterKindName(data){
+  if (data === "") return data;
+  if (data == 0) {
+    return "电表"
+  } else if (data == 1) {
+    return "水表"
+  } else if (data == 2) {
+    return "燃气表"
+  } else if (data == 3) {
+    return "污水表"
+  } else if (data == 4) {
+    return "温湿度表"
+  } else if (data == 5) {
+    return "液位表"
+  }else if (data == 6) {
+    return "压力表"
+  }else if (data ==7) {
+    return "水浸"
+  }else if (data ==8) {
+    return "新风机"
+  }else if (data ==9) {
+    return "排风机"
+  }else if (data ==10) {
+    return "集水坑"
+  }else if (data ==11) {
+    return "排烟机"
+  }else if (data ==12) {
+    return "电梯"
+  }else if (data ==13) {
+    return "温度传感器"
+  }else if (data ==14) {
+    return "多路照明控制器"
+  }else if (data ==15) {
+    return "报警传感器"
+  }else if (data ==16) {
+    return "断路器"
+  }else if (data ==17) {
+    return "空调"
+  }else if (data ==18) {
+    return "变压器温控器"
+  }else if (data ==19) {
+    return "环境监测"
+  }else if (data ==20) {
+    return "电能质量分析仪"
+  }else if (data ==21) {
+    return "电池监测"
+  }else if (data ==22) {
+    return "运行状态监控装置"
+  }else if (data ==110) {
+    return "视频监控"
+  }else if (data ==111) {
+    return "网关设备"
+  }else if (data ==119) {
+    return "消防设备"
+  }else if (data ==9999) {
+    return "其他"
+  }
+}
+
+
+
+
+function equipmentStatus(list, dataDictionary) {
+  var vals = [];
+  if (list && list.length > 0) { 
+    for (var i = 0; i < list.length; i++) {
+      list[i].secondVarTypeData.forEach(function (element, index) {
+        var unit = element.unit;
+        if (unit == "m3") {
+          unit = "m³";
+        }
+        var value = 0;
+        if (index == 0) {
+          if (element.meterKind == "0" || element.meterKind == "1") {
+            value = parseFloat(element.dataValue).toFixed(2);
+            vals.push(value + unit);
+          } else {
+            var data = []
+            dataDictionary.forEach(function (res) {
+              if (parseFloat(res.statusValue) == element.dataValue && res.name == element.name) {
+                data.push(res)
+              }
+            })
+            if (data.length > 0) {
+              vals.push(data[0].description);
+            } else {
+              vals.push(element.dataValue + unit);
+            }
+          }
+        }
+      })
+    }
+    return vals[0]
+  }
+}
+function varRuleAlarm(data,name,unit,dataDictionary){
+  if(data&&data.length>0){
+       var  arr = [];
+       data.forEach(function(res) {
+         if (res.varLimitValue !== "") {
+           var str = [];
+           dataDictionary.forEach(function (item) {
+             if (
+               parseFloat(item.statusValue) == res.varLimitValue &&
+               item.name == name
+             ) {
+               str.push(item)
+             }
+           });
+            console.log(str)
+           if (str.length > 0) {
+             arr.push(str[0].description);
+           } else {
+             if (res.varLimitOpt == 0) {
+               str = ">";
+             } else if (res.varLimitOpt == 1) {
+               str = "<";
+             }
+             arr.push(str + res.varLimitValue + unit);
+           }
+         }
+       });
+       return arr.join(",");
+  }
+}
+function currentDataSet(dataValue, name, unit,dataDictionary){
+  var data =[]
+  dataDictionary.forEach(function(res) {
+    if (parseFloat(res.statusValue) == dataValue && res.name == name) {
+      data.push(res)
+    }
+  });
+  if (data.length > 0) {
+    return data[0].description;
+  } else {
+    if (dataValue != null) {
+      return dataValue + unit;
+    }
+  }
+}
+
+function hasAuthCode(array, code) {
+  var isHas = false;
+  for (var i = 0; i < array.length; ++i) {
+    if (array[i].indexOf('iot-package.pages.index.index.' + code) > -1) {
+      isHas = true
+    }
+  }
+  return isHas
+}
+
+module.exports = {
+  alarmTypeName: alarmTypeName,
+  equipmentStatus: equipmentStatus,
+  meterKindName: meterKindName,
+  varRuleAlarm: varRuleAlarm,
+  currentDataSet: currentDataSet,
+  hasAuthCode: hasAuthCode
+}

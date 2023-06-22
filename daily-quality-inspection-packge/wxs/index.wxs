@@ -1,0 +1,19 @@
+var checkStatus = function (cur, obj) {
+  if(cur == 3 || cur == 5){
+    // 'jujue_bg' : 'normal_bg'
+    return  obj.status == 1
+  } else {
+    // 'jujue_bg' : 'normal_bg'
+    return  obj.status == 2 
+  }
+}
+var clearNull = function name(data) {
+    if(data == null){
+      return ''
+    }
+    return data
+}
+module.exports = {
+  checkStatus:checkStatus,
+  clearNull:clearNull
+}

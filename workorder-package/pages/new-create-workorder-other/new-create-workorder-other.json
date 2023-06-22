@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "select-order-type": "./components/select-order-type/select-order-type",
+    "select-service-type": "./components/select-service-type/select-service-type",
+    "select-visit-time": "./components/select-visit-time/select-visit-time",
+    "service-type-input": "../../components/service-type-input/service-type-input",
+    "select-place": "./components/select-place/select-place",
+    "complete-order": "./components/complete-order/complete-order",
+    "new-upload-images": "/components/new-upload-images/new-upload-images",
+    "new-record": "/components/new-record/new-record"
+  },
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,20 @@
+<custom-popup 
+  isRound
+  position="bottom" 
+  title="选择上门时间" 
+  isShowPopup="{{show}}" 
+  customStyle="height: 60%;"
+  bind:hidePopup="close"
+>
+  <view class="type_con">
+    <view class="first">
+      <view class="item {{activeDate == item.code && 'active'}}" wx:for="{{dateList}}" wx:key="index" data-item="{{item}}" bind:tap="selectDate">{{item.label}}</view>
+    </view>
+    <view class="second">
+      <view class="item {{activeTime == item.code && 'active'}} {{item.isDisabled && 'disabled'}}" wx:for="{{timeList}}" wx:key="code" data-item="{{item}}" bind:tap="selectTime">
+        <view class="txt">{{item.label}}</view>
+        <i class="new-iconfont icon-comfirm" wx:if="{{activeTime == item.code}}"></i>
+      </view>
+    </view>
+  </view>
+</custom-popup>

@@ -1,0 +1,19 @@
+function _includes(key, keyList){
+  var index = keyList.indexOf(key);
+  return index >= 0
+}
+function _getRemarkTxt(type){
+  var obj = {
+        DISPOSE_ORDER: '处理过程',
+        ORDER_SBTH: '原因',
+        ORDER_YQX: '原因',
+        ORDER_REVIEW: '复查内容',
+      },
+      txt = '';
+  txt = obj[type] || '意见'
+  return txt
+}
+module.exports = {
+  _includes: _includes,
+  _getRemarkTxt: _getRemarkTxt,
+}

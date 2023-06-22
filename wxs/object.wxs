@@ -1,0 +1,7 @@
+function objectHandle(obj){
+  return JSON.stringify(obj)
+}
+
+module.exports = {
+  objectHandle: objectHandle
+}

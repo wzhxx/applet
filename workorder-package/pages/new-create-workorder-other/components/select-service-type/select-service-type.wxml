@@ -1,0 +1,34 @@
+<import src="/static/templates/template.wxml"></import>
+<custom-popup 
+  isRound
+  position="bottom" 
+  title="选择服务类型" 
+  isShowPopup="{{show}}" 
+  bind:hidePopup="close"
+>
+  <view class="type_con" style="bottom: {{!firstList.length && 0}}">
+    <view class="first_wrapper">
+      <view class="first">
+        <view class="first_con">
+          <block wx:if="{{firstList.length}}">
+            <view class="item {{firstInfo.id == item.id && 'active'}}" wx:for="{{firstList}}" wx:key="id" data-item="{{item}}" bind:tap="selectFirst">
+              <image class="ico" src="{{newImgUrl}}noteBook.png" />
+              <view class="txt">{{item.typeName}}</view>
+            </view>
+          </block>
+          <template wx:else is="emptyData" data="{{newImgUrl}}"></template>
+        </view>
+      </view>
+    </view>
+    <view class="second">
+      <block wx:if="{{secondList.length}}">
+        <view class="item {{secondInfo.id == item.id && 'active'}}" wx:for="{{secondList}}" wx:key="id" data-item="{{item}}" bind:tap="selectSecond">
+          <view class="txt">{{item.typeName}}</view>
+          <i class="new-iconfont icon-comfirm" wx:if="{{secondInfo.id == item.id}}"></i>
+        </view>
+      </block>
+      <template wx:else is="emptyData" data="{{newImgUrl}}"></template>
+    </view>
+  </view>
+  <template wx:if="{{firstList.length}}" is="bigBtn" data="{{btnText: '确定', bigBtnTap: 'handleSelect'}}"></template>
+</custom-popup>

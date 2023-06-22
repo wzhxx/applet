@@ -1,0 +1,14 @@
+function getCount(arr, id){
+  var obj = arr.filter(function filterFunc(item) {
+    return item.id === id;
+  });
+  if(obj.length){
+    return obj[0].amsCount || 0;
+  }else {
+    return 0;
+  }
+}
+
+module.exports = {
+  getCount: getCount
+}

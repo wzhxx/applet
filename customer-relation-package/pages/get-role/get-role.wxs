@@ -1,0 +1,11 @@
+
+function isAdded(selectedList, roleId) {
+  var flag = selectedList.some(function(v) {
+    return v.roleId === roleId
+  })
+  return !flag
+}
+
+module.exports = {
+  isAdded: isAdded
+}

@@ -1,0 +1,28 @@
+function overTimeStatusFilter(val) {
+    var config = {
+        '1': '超时未开始',
+        '2': '超时未派单',
+        '3': '超时未派单',
+        '4': '超时未完成',
+        '5': '自动关单',
+        '6': '任务超时',
+    }
+    return config[val] || '任务超时'
+}
+
+function iconStatusFilter(val) {
+    var config = {
+        '000000000000000022': 'icon_report_drugs.svg', // 药品运送
+        '000000000000000023': 'icon_report_sample.svg', // 标本运送
+        '000000000000000024': 'icon_report_blood.svg', // 血制品运送
+        '000000000000000025': 'icon_report_accompaniment.svg', // 病人陪检
+        '000000000000000026': 'icon_report_article.svg', // 物品运送
+        '000000000000000027': 'icon_report_book.svg', // 文书运送
+    }
+    return config[val] || ''; 
+}
+
+module.exports = {
+    overTimeStatusFilter: overTimeStatusFilter,
+    iconStatusFilter: iconStatusFilter
+}

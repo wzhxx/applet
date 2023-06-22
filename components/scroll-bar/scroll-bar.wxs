@@ -1,0 +1,20 @@
+var REGEXP = getRegExp('^-?\d+(\.\d+)?$');
+
+function addUnit(value) {
+  if (value == null) {
+    return undefined;
+  }
+
+  return REGEXP.test('' + value) ? value + 'px' : value;
+}
+
+function lineStyle(data) {
+  return style({
+    transform: 'translateX(' + data.lineOffsetLeft + 'px)',
+    '-webkit-transform': 'translateX(' + data.lineOffsetLeft + 'px)'
+  });
+}
+
+module.exports = {
+  lineStyle: lineStyle
+};

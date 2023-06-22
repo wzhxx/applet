@@ -1,0 +1,27 @@
+
+function total(assessList) {
+  var arr1 = assessList.filter( function(v) {
+    return v.bonusstandardOrDeductionstandard === 1
+  }),
+  arr2 = assessList.filter( function(v) {
+    return v.bonusstandardOrDeductionstandard === 2
+  }),
+  add = 0,
+  sub = 0;
+
+  if (arr1.length) {
+    add = arr1.length > 1 ? 
+          arr1.reduce( function(total, cur) { return parseFloat(total) + parseFloat(cur.itemValueSum) }, 0) :
+          arr1[0].itemValueSum
+  }
+  if (arr2.length) {
+    sub = arr2.length > 1 ?
+          arr2.reduce( function(total, cur) { return parseFloat(total) + parseFloat(cur.itemValueSum) }, 0 ) :
+          arr2[0].itemValueSum
+  }
+  return { add, sub }
+}
+
+module.exports = {
+  total: total
+}

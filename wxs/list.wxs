@@ -1,0 +1,55 @@
+// 员工工作台（pages/index/index），游客、客户我的事项(pages/client-myitems/client-myitems、pages/vistor-myitems/vistor-myitems)
+function removeSmallNameNull(val) {
+    var result = '';
+    if (val) {
+        if (val.indexOf('-') !== -1) {
+            var smallNameTmpArr = val.split('-');
+            if (smallNameTmpArr[0] != 'null') {
+                if (smallNameTmpArr[1] != 'null' && smallNameTmpArr[1]) {
+                    result = smallNameTmpArr[0] + '-' + smallNameTmpArr[1];
+                } else {
+                    result = smallNameTmpArr[0]
+                }
+            } else {
+                // result = ''
+            }
+        } else {
+            result = val
+        }
+    }
+    return result;
+}
+
+function getIconNum(priorityName, serviceStatusObj, isOutsource) {
+    var num = 0
+    if (priorityName == '紧急') {
+        num = num + 1
+    }
+    if (serviceStatusObj['要单']) {
+        num = num + 1
+    }
+    if (serviceStatusObj['返工']) {
+        num = num + 1
+    }
+    if (serviceStatusObj['督办']) {
+        num = num + 1
+    }
+    if (isOutsource == 'Y') {
+        num = num + 1
+    }
+    return num
+}
+
+function entryAuth(array, entryType) {
+    if (array.indexOf(entryType) != -1) {
+        return true
+    } else {
+        return false
+    }
+}
+
+module.exports = {
+    removeSmallNameNull: removeSmallNameNull,
+    getIconNum: getIconNum,
+    entryAuth: entryAuth
+};

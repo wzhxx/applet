@@ -1,0 +1,28 @@
+function getLength(arr, date, mode){
+    var length = 0
+    for (var i = 0; i < arr.length; i++) {
+        if(mode == 'time'){  //时模式
+            if(arr[i].startTime.split(' ')[0] == date){
+                length = length + arr[i].timeArr.length
+            }else {
+            }
+        }
+        if(mode == 'day'){  //日模式
+            if(arr[i].startTime.slice(0, 7) == date){
+                length = length + 1
+            }
+            else {
+            }
+        }
+    }
+    return length 
+}
+
+function getDate(monthStr, index){
+    return monthStr + '-' + (index < 10 ? ('0' + index) : index)
+}
+
+module.exports = {
+    getLength: getLength,
+    getDate: getDate
+}

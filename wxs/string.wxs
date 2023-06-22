@@ -1,0 +1,178 @@
+function intToStr(num) {
+    return num.toString()
+}
+
+function removeStr(str) {
+    // var regExp = /^[\·\~\！\@\#\￥\%\……\&\*\（\）\——\-\+\=\【\】\{\}\、\|\；\‘\’\：\“\”\《\》\？\，\。\、\`\~\!\#\$\%\^\&\*\(\)\_\[\]\{\}\\\|\;\'\'\:\"\"\,\.\/\<\>\?]+$/
+    if (str[str.length - 1] === ',' || str[str.length - 1] === '，') {
+        return str.slice(0, str.length - 1)
+    } else {
+        return str
+    }
+}
+
+
+function strSlice(str, start, end) {
+    if (end) {
+        return str.slice(start, end)
+    } else {
+        return str.slice(start)
+    }
+};
+// 仓储使用
+function strSliceNew(str1, start, endStr,source) {
+    var str = str1?str1.toString():'';
+    var  num = 4;
+    if(!str||!endStr) return 0;
+    if(source==='person'){
+        num = endStr?endStr.length<=2?1:endStr.length<4?2:1:3;
+    }else{
+        num = endStr?endStr.length<=2?4:endStr.length<4?3:2:4;
+    }
+    if(str.length>num){
+        return str.slice(start, num)+'··· '
+    }else{
+        return str.slice(start, num)
+    }
+    
+};
+
+function strSplit(str, splitStr) {
+    return str.split(splitStr)
+}
+
+function timeStrSplit(string, str, index) {
+    return string.split(str)[index]
+}
+
+function timeCompare(timeStr1, timeStr2) {
+    let dateStr = '1970-01-01'
+    timeStr1 = timeStr1 + ':00'
+    let startTime = dateStr + ' ' + timeStr1
+    let endTime = dateStr + ' ' + timeStr2
+    let stratTimeValue = new Date(stratTime).getTime()
+    let endTimeValue = new Date(endTime).getTime()
+    console.log(timeStr1, timeStr2, startTime, endTime, startTimeValue, endTimeValue)
+    if (startTimeValue - endTimeVaule > 0) {
+        return false
+    } else {
+        return true
+    }
+}
+
+function strReplace(str) {
+    var replaceStr = ''
+    var arr = str ? str.split(':') : []
+    if (arr[1] == '00') {
+        arr[1] = '30'
+        replaceStr = arr.join(':')
+    } else if (arr[1] == '30') {
+        arr[0] = (parseInt(arr[0]) + 1) < 10 ? '0' + (parseInt(arr[0]) + 1) : (parseInt(arr[0]) + 1) + ''
+        arr[1] = '00'
+        replaceStr = arr.join(':')
+    }
+    return replaceStr
+}
+
+function strSplitFunc(str1, str2) {
+    if (str1) {
+        if (str1.indexOf(str2) == '-1') {
+            return false
+        } else {
+            return true
+        }
+    }
+}
+
+function removeSmallNameNull(val) {
+    var result = '';
+    if (val) {
+        if (val.indexOf('-') !== -1) {
+            var smallNameTmpArr = val.split('-');
+            if (smallNameTmpArr[0] != 'null') {
+                if (smallNameTmpArr[1] != 'null' && smallNameTmpArr[1]) {
+                    result = smallNameTmpArr[0] + '-' + smallNameTmpArr[1];
+                } else {
+                    result = smallNameTmpArr[0]
+                }
+            } else {
+                // result = ''
+            }
+        } else {
+            result = val
+        }
+    }
+    return result;
+}
+
+function strIndexOf(string,str){
+    if(string.indexOf(str) != -1){
+        return true
+    }else{
+        return false
+    }
+}
+
+function iconIsDisplayed(type, str) {
+    if (type) {
+        if (type.indexOf(str) != -1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+function overtimeNameText(value) {
+    var str = "";
+    if (value == 1) str = "一级督办";
+    if (value == 2) str = "二级督办";
+    if (value == 3) str = "三级督办";
+    return str;
+}
+
+function strJsonParse(str){
+    return JSON.parse(str)
+}
+function strToJSON(strJson, type){
+    return strJson && JSON.parse(strJson)[type]
+}
+
+function computeTime(time) {
+    // if ((getDate().getTime() - getDate(time).getTime()) / 1000 > 600) {
+    //     return time;
+    // } else {
+    //     if (((getDate().getTime() - getDate(time).getTime()) / 60000).toFixed() === '-0') {
+    //         return '刚刚'
+    //     } else if (((getDate().getTime() - getDate(time).getTime()) / 60000).toFixed() < 1) {
+    //         return '1分钟前'
+    //     } else {
+    //         return ((getDate().getTime() - getDate(time).getTime()) / 60000).toFixed() + '分钟前';
+    //     }
+    // }
+}
+
+function equalStr(str1, str2){
+  if(typeof(str1) == "undefined" || typeof(str2) == "undefined") return;
+  return str1.toLowerCase() === str2.toLowerCase();
+}
+
+module.exports = {
+    intToStr: intToStr,
+    removeStr: removeStr,
+    strSlice: strSlice,
+    strSliceNew: strSliceNew,
+    strSplit: strSplit,
+    timeStrSplit: timeStrSplit,
+    timeCompare: timeCompare,
+    strSplitFunc: strSplitFunc,
+    strReplace: strReplace,
+    strIndexOf: strIndexOf,
+    removeSmallNameNull: removeSmallNameNull,
+    iconIsDisplayed: iconIsDisplayed,
+    overtimeNameText: overtimeNameText,
+    strJsonParse: strJsonParse,
+    strToJSON: strToJSON,
+    computeTime: computeTime,
+    equalStr: equalStr
+}

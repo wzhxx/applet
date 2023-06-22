@@ -1,0 +1,83 @@
+<import src="../../../static/templates/template.wxml"></import>
+<view class="daily_quality_add">
+  <mp-navigation-bar back="{{false}}" background="var(--tint)">
+    <view slot="left" class="title_btn">
+      <i class="new-iconfont icon-back2" bind:tap="backFunc"></i>
+      <text class="top_title">新建日检单</text>
+    </view>
+  </mp-navigation-bar>
+  <view class="add_item">
+    <view class="add_item_box">
+      <view class="label">所属组织</view>
+      <view class="value" bindtap="handleSelctOrg">
+      <view class="org_name">{{checkForm.projectName}}</view>
+      <i class="new-iconfont icon-arrowDown org_arrow"></i></view>
+    </view>
+    <view class="add_item_box">
+      <view class="label">检查日期</view>
+      <view class="value">{{checkForm.time}}</view>
+    </view>
+    <view class="add_item_box">
+      <view class="label">检查人姓名</view>
+      <view class="value">{{checkForm.checkName}}</view>
+    </view>
+    <view class="add_item_box">
+      <view class="label">检查人部门</view>
+      <view class="value">{{checkForm.checkDP}}</view>
+    </view>
+    <view class="add_item_box">
+      <view class="label">检查人职位</view>
+      <view class="value">{{checkForm.jobName}}</view>
+    </view>
+  </view>
+  <view class="add_list_title">被检查人员列表</view>
+  <!-- 人员 -->
+  <view class="list_box">
+    <view class="list_item" wx:for="{{listData}}" wx:for-item="item" wx:key="index">
+      <view class="item_left">
+        <view class="name">
+          <view class="new-iconfont icon-people"></view>
+          <view>{{item.userName}}</view>
+        </view>
+        <view class="sub_label">
+          <view class="sub_title">所属部门</view>
+          <view class="sub_value">{{item.userOrgName}}</view>
+        </view>
+        <view class="sub_label number">
+          <view class="sub_title">部门人数</view>
+          <view class="sub_value">{{item.userOrgNum}}</view>
+        </view>
+      </view>
+      <view class="item_right">
+        <i wx:if="{{item.checkStatus == 0}}" 
+        class="new-iconfont icon-delete delete_icon" data-index="{{index}}" bindtap="handeleDeleteListItem"></i>
+        <i wx:else 
+        class="new-iconfont icon-delete delete_icon op_btn"></i>
+        <view class="right_bottom" data-item="{{item}}" data-index="{{index}}" bindtap="handeleListItem">
+          <view class="status normal_status" wx:if="{{item.checkStatus == 0}}">待检查</view>
+          <view  wx:else class="status {{item.checkStatus == 1 ? 'success_status' : 'error_status'}}">
+            {{item.checkStatus == 1 ? '正常': '异常'}}
+          </view>
+          <i class="new-iconfont icon-arrowRight"></i>
+        </view>
+      </view>
+    </view>
+    <view class="no_data" wx:if="{{!listData.length}}">
+    <image src="{{newImgUrl}}nosf.png"></image>
+    <text>暂无人员</text>
+  </view>
+    <view class="white_block"></view>
+    <view class="btn_box">
+      <template is="bigBtn" data="{{btnLeftIcon:'icon-increase' , extClass: 'add_person', btnText: '添加人员', bigBtnTap: 'handleAdd'}}"></template>
+      <template is="twoBtn"
+        data="{{leftBtnText: '保存草稿',leftBtnTap:'handleCG',rightBtnText: '完成', leftExtClass: submitCGStatus ? 'disabled' : '',rightExtClass: submitStatus ? 'disabled' : '', rightBtnTap: 'handleSubmit'}}"></template>
+    </view>
+  </view>
+   <!-- 项目 -->
+   <project-popup isShowPopup="{{isShowProjectPopup}}" projectId="{{checkForm.projectId}}" bindchooseProject="chooseProject">
+  </project-popup>
+    <!-- 选人组件 -->
+    <new-select-handler wx:if="{{isShowSelectPeo}}" isShowOrg="{{false}}" show="{{isShowSelectPeo}}" banUsers="{{banUsers}}" subSystemCode="PZRJ" 
+    tabs="{{['departmentUser','groupUser']}}"
+    organizationId="{{checkForm.projectId}}" bind:selectCallback="selectCallback" />
+</view>

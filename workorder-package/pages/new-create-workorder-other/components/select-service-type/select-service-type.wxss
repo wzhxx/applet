@@ -1,0 +1,104 @@
+.type_con{
+  background: var(--bgColor);
+  position: absolute;
+  top: 106rpx;
+  left: 0;
+  right: 0;
+  bottom: 152rpx;
+  overflow: hidden;
+  display: flex;
+}
+.first_wrapper{
+  border-right: var(--border1);
+  overflow: hidden;
+}
+.type_con .first{
+  text-align: center;
+  margin-right: -17rpx;
+  background: var(--tint);
+  color: var(--dark);
+  font-weight: var(--fontWeight600);
+  position: relative;
+  z-index: 0;
+  overflow: auto;
+  height: 100%;
+}
+.type_con .first_con{
+  width: 320rpx;
+  padding-right: 17rpx;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  height: 100%;
+}
+.first .item{
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  padding-left: var(--margin);
+  border-bottom: var(--border1);
+  box-sizing: border-box;
+}
+.first .item .ico{
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: var(--margin16);
+  flex: none;
+}
+.first .item .txt{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.first .item.active{
+  width: 304rpx;
+  background: var(--bgColor);
+  position: relative;
+  /* border-right: 1rpx solid var(--bgColor); */
+}
+.first .item.active::after{
+  content: '';
+  width: 1rpx;
+  height: 100%;
+  background: var(--bgColor);
+  position: absolute;
+  right: 0;
+}
+.type_con .second{
+  flex: 1;
+  text-align: center;
+  background: var(--bgColor);
+  padding: var(--margin24) var(--margin);
+  overflow-x: hidden;
+}
+.second .item{
+  width: 100%;
+  padding: var(--margin24);
+  text-align: center;
+  box-sizing: border-box;
+  background: var(--tint);
+  color: var(--dark);
+  border-radius: var(--borderRadius12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.second .item+.item{
+  margin-top: var(--margin16);
+}
+.second .item.active{
+  background: var(--themeColor);
+  color: var(--tint);
+}
+.second .item .txt{
+  flex: 1;
+  word-break: break-word;
+}
+.second .item i{
+  margin-left: var(--margin16);
+}
+.big_btn {
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 64rpx);
+}

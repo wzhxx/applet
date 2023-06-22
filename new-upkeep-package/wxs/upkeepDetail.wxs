@@ -1,0 +1,143 @@
+function tranformIdentify(val) {
+  var str = {
+    IMPORTANCE: '重要',
+    PRINCIPAL: '主要',
+    ORDINARY: '一般'
+  }
+  return str[val]
+}
+
+function superviseLevelText(val) {
+  var text = ''
+  if (str == 10) text = '一级督办'
+  if (str == 20) text = '二级督办'
+  if (str == 30) text = '三级督办'
+  return text
+}
+
+function operateTypeNameText(val) {
+  var text = ''
+  if (str == 'TRANSFER_ORDER') text = '审核意见：'
+  if (str == 'DISPOSE_ORDER') text = '处理过程：'
+  if (str == 'AUDIT_ORDER') text = '审核意见：'
+  if (str == 'RETURN_VISIT') text = '回访详情：'
+  if (str == 'URGENT_ORDER') text = '加急详情：'
+  if (str == 'ORDER_CB') text = '催办意见：'
+  if (str == 'ORDER_GQ') text = '挂起原因：'
+  if (str == 'ORDER_TJXT' || str == 'SEND_BACK' || str == 'ORDER_GQ') text = '审核意见：'
+  if (str == 'SUPERVISION_ORDER') text = '督办意见：'
+  if (str == 'EVALUATE_ORDER') text = '评价意见：'
+  if (str == 'ORDER_QX') text = '取消原因：'
+  return text
+}
+
+function reasonNameText(val) {
+  var text = ''
+  if (str == 'ORDER_GQ') text = '挂起理由：'
+  if (str == 'TRANSFER_ORDER') text = '转单理由：'
+  if (str == 'ORDER_TJXT') text = '协同理由：'
+  if (str == 'SEND_BACK') text = '退回理由：'
+  return text
+}
+
+function strSplit(val,type){
+    if(type=="hours"){
+      return val.split(' ')[1].split(':')[0]
+    }else if(type=="minutes"){
+      return val.split(' ')[1].split(':')[1]
+    }else if(type=="year"){
+      return val.split(' ')[0] 
+    }
+}
+
+function isHas(val){
+  var arr=['TRANSFER_INSPECTION', 'TRANSFER_TAKE'];
+  return arr.indexOf(val)>-1
+}
+
+function iconIsDisplayed(code,text){
+  if(code) {
+    if(type.indexOf(text) != -1) {
+      return 1
+    }
+    else {
+      return 0
+    }
+  }
+}
+
+function serviceStatusCount(val,index,type){
+  if(type){
+    return val.split(',')[index] > 0
+  }else{
+    return val.split(',')[index]
+  }
+}
+function strName(value) {
+  return value.split('')[0]
+}
+
+function hasStatus(value) {
+  return ['已取消', '巡检取消', '接单取消'].indexOf(value) > -1
+}
+
+function strSplitTime(value, type) {
+  console.log(value)
+  if (type == "year") {
+    return value.split(' ')[0]
+  } else if (type == "hours") {
+    return value.split(' ')[1].split(':')[0]
+  } else if (type == "minutes") {
+    return value.split(' ')[1].split(':')[1]
+  }
+}
+
+function whitchReason(status){
+  var toggleObj = {
+        ORDER_JDZD_AUDIT: {name: '转单', key: 'transferReason'},
+        ORDER_BYZD_AUDIT: {name: '转单', key: 'transferReason'},
+        ORDER_JDQX_AUDIT: {name: '取消', key: 'cancelReason'},
+        ORDER_BYXT_AUDIT: {name: '协同', key: 'synergyReason'},
+      };
+  return toggleObj[status]
+}
+function cutString(str, len) {
+  if (str) {
+    var numberWords = str.length;
+    if (numberWords > len) {
+      var text = "";
+      text = str.substring(0, len) + "...";
+      return text
+    } else {
+      return str
+    }
+  }
+}
+
+function isShowButton(equipmentStatus, urlType, status, isUpkeepUser) {
+  var isUpkeeper = isUpkeepUser === 'Y';
+  console.log((equipmentStatus === 'BYZ' || equipmentStatus === 'DSP') && urlType != 2 && status === 'ORDER_BYZ' && isUpkeeper);
+  return ((equipmentStatus === 'BYZ' || equipmentStatus === 'DSP') && urlType != 2 && status === 'ORDER_BYZ' && isUpkeeper);
+}
+
+function isAuditStatus(status){
+  return (status === 'ORDER_JDZD_AUDIT' || status === 'ORDER_JDQX_AUDIT' || status === 'ORDER_BYXT_AUDIT' || status === 'ORDER_BYZD_AUDIT')
+}
+
+module.exports = {
+  tranformIdentify: tranformIdentify,
+  superviseLevelText: superviseLevelText,
+  operateTypeNameText: operateTypeNameText,
+  reasonNameText: reasonNameText,
+  strSplit:strSplit,
+  isHas:isHas,
+  iconIsDisplayed:iconIsDisplayed,
+  serviceStatusCount:serviceStatusCount,
+  strName: strName,
+  hasStatus:hasStatus,
+  strSplitTime: strSplitTime,
+  cutString: cutString,
+  isShowButton: isShowButton,
+  isAuditStatus: isAuditStatus,
+  whitchReason: whitchReason,
+}

@@ -1,0 +1,13 @@
+// 个人资料(pages/personal-data/personal-data)
+function phoneDeal(str, frontLen, endLen, cha){  //str原字符串  fontLen保留前几位 endLen保留后几位  cha替换字符
+    var len = str.length - frontLen - endLen;
+    var reStr = '';
+    for (var i = 0; i < len; i++) {
+        reStr += cha ? cha : '*';
+    }
+    return str.substring(0, frontLen) + reStr + str.substring(str.length - endLen);
+}
+
+module.exports = {
+    phoneDeal: phoneDeal
+}

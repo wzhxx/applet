@@ -1,0 +1,30 @@
+function addOrSubText(addOrSub) {
+  return addOrSub === 1 ? '加分' : '扣分'
+}
+// 扣分标准 加分标准 列表 字段
+function standardList(isEdit, addOrSub) {
+  if (isEdit) return 'bonusAndDeductionStandardDtoList';
+  return addOrSub === 1 ? 'assessmentitemsBonusstandardDtoList' : 'assessmentitemsDeductionstandardDtoList'
+}
+// 扣分内容 加分内容 字段
+function  standardContent(isEdit, addOrSub) {
+  if (isEdit) return 'itemStandardContent';
+  return addOrSub === 1 ? 'bonusStandardContent' : 'deductionStandardContent'
+}
+// 扣分 加分 分值 字段
+function standardValue(isEdit, addOrSub) {
+  if (isEdit) return 'itemValue';
+  return addOrSub === 1 ? 'bonusValue' : 'deductionValue'
+}
+
+function imgLenStr(attachmentDtoList) {
+  return attachmentDtoList.length + '/10'
+}
+
+module.exports = {
+  addOrSubText: addOrSubText,
+  standardList: standardList,
+  standardContent: standardContent,
+  standardValue: standardValue,
+  imgLenStr: imgLenStr
+}

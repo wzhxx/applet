@@ -1,0 +1,71 @@
+function showBtn(checkUserStatus, status, urlType,isRead,messageFlag,userList=[],userId,isShowNoticeBtn,detailObj) {
+    var btnArrList = []
+    console.log(isShowNoticeBtn);
+    if (isShowNoticeBtn&& urlType != 3&&[1,2,3,5,6,7].indexOf(status) > -1) {
+        btnArrList.push({
+            btnText: '跟进',
+            extClass: 'light_btn',
+            btnTap: 'handleGJ'
+        })
+    }
+    if (checkUserStatus && [1, 2, 3, 5].indexOf(status) > -1 && urlType != 3) {
+        btnArrList.push({
+            btnText: '转单',
+            extClass: 'light_btn',
+            btnTap: 'handleZD'
+        })
+    }
+    if (checkUserStatus && status == 3 && urlType != 3) {
+        btnArrList.push({
+            btnText: '不合格',
+            btnTap: 'handleBHG'
+        })
+        btnArrList.push({
+            btnText: '合格',
+            btnTap: 'handleHG'
+        })
+    }
+
+    if (checkUserStatus && [2, 5].indexOf(status) > -1 && urlType != 3) {
+        btnArrList.push({
+            btnText: status == 5 ? '重新整改' : '整改',
+            btnTap: 'handleDraft'
+        })
+    }
+    if(urlType != 3&&status == 2&&detailObj.createId==userId){
+        btnArrList.push({
+            btnText: '撤回',
+            btnTap: 'handleRetract'
+        })
+    }
+    // if (!checkUserStatus && status == 2 && urlType != 3) {
+    //     btnArrList.push({
+    //         btnText: '等待整改',
+    //         btnTap: 'handleDraft'
+    //     })
+    // }
+    // if (!checkUserStatus && status == 3 && urlType != 3) {
+    //     btnArrList.push({
+    //         btnText: '等待整改核验',
+    //         btnTap: 'handleDraft'
+    //     })
+    // }
+    if (urlType == 3 && isRead == '0') {
+        btnArrList.push({
+            btnText: messageFlag == '1' && status != 4 ? '督办' : '已阅',
+            btnTap: 'handleDB'
+        })
+    }
+    if ( status == 8 ) {
+        btnArrList.push({
+            btnText: '重新提交',
+            btnTap: 'handleReSubmit'
+        })
+    }
+    return btnArrList
+}
+
+
+module.exports = {
+    showBtn: showBtn
+};

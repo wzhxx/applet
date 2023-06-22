@@ -1,0 +1,40 @@
+function equipmentMatch(code) {
+    var config = {
+        '1': {
+            icon: 'icon-equipment0000',
+            name: '普通设备'
+        },
+        '2': {
+            icon: 'icon-equipmentType4',
+            name: '物联网设备'
+        },
+        '3': {
+            icon: 'icon-equipmentType6',
+            name: '特种设备'
+        },
+        '4': {
+            icon: 'icon-equipmentType2',
+            name: '环境设备'
+        },
+        '5': {
+            icon: 'icon-equipmentType5',
+            name: '虚拟设备'
+        },
+        '6': {
+            icon: 'icon-equipmentType1',
+            name: '重要设施'
+        },
+        '7': {
+            icon: 'icon-equipmentType3',
+            name: '高压工具'
+        }
+    }
+    return config[code];
+}
+function formatShift(value) {
+    return value ? value.split(' ').shift() : ""
+}
+module.exports = {
+    equipmentMatch: equipmentMatch,
+    formatShift: formatShift
+}

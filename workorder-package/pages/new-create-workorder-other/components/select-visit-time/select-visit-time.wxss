@@ -1,0 +1,56 @@
+.type_con{
+  background: var(--bgColor);
+  position: absolute;
+  top: 106rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+}
+.type_con .first,
+.type_con .second{
+  background: var(--tint);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+.type_con .first{
+  /* width: 220rpx; */
+  flex: none;
+  border-right: var(--border1);
+}
+.first .item,
+.second .item{
+  height: 100rpx;
+  line-height: 100rpx;
+  box-sizing: border-box;
+  border-bottom: var(--border1);
+  padding: 0 var(--margin);
+}
+/* .first .item{
+} */
+.first .item.active{
+  border-left: var(--border4);
+  border-left-color: var(--themeColor);
+  color: var(--themeColor);
+}
+.type_con .second{
+  flex: 1;
+}
+.second .item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.second .item.active{
+  color: var(--themeColor);
+}
+.second .item.disabled{
+  color: var(--dark40);
+}
+.second .item .txt{
+  flex: 1;
+}
+.second .item i{
+  margin-left: var(--margin16);
+}

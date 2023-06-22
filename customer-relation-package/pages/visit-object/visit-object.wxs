@@ -1,0 +1,11 @@
+
+function isAdded(selectedList, customerContactId) {
+  var flag = selectedList.some(function(v) {
+    return v.customerContactId === customerContactId
+  })
+  return !flag
+}
+
+module.exports = {
+  isAdded: isAdded
+}

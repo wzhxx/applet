@@ -1,0 +1,31 @@
+.type_header {
+  background: var(--bgColor);
+}
+.type_con{
+  padding: var(--margin8) var(--margin);
+  background: var(--bgColor);
+  position: absolute;
+  top: 104rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+}
+.type_con .item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--margin);
+  padding-right: var(--margin24);
+  background: var(--tint);
+  border-radius: var(--borderRadius12);
+}
+.type_con .item+.item{
+  margin-top: var(--margin16);
+}
+.type_con .item.active{
+  color: var(--themeColor);
+}
+.type_con .item i{
+  margin-left: var(--margin);
+}

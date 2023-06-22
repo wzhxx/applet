@@ -1,0 +1,243 @@
+<import src="../../../static/templates/template.wxml"></import>
+<import src="../../templates/index.wxml"></import>
+<wxs src="../../wxs/index.wxs" module="workOrderWxs" />
+<view class="home_box">
+  <mp-navigation-bar style="z-index: 100" back="{{false}}" background="{{appStyle.tint}}">
+    <view slot="left" bind:tap="back" class="title_btn flex_center">
+      <i class="new-iconfont icon-back2" style="font-size: 44rpx;margin-right: 24rpx;"></i>
+      <text class="nav_title">创建工单</text>
+    </view>
+  </mp-navigation-bar>
+  <view class="page_con">
+    <view class="create_con">
+      <view class="type_box" bind:tap="showSelectType" style="opcity: {{isEdit?0.8:1}}">
+        <image class="type_img" src="{{typeInfo.id ? typeInfo.serviceFlowIcon : defTypeImg}}" />
+        <view class="txt">{{typeInfo.id ? typeInfo.serviceFlowAlias : '选择工单分类'}}</view>
+        <i class="new-iconfont icon-arrowRight dark40"></i>
+      </view>
+      <view class="handle_block">
+        <!-- 工单名称 -->
+        <custom-input
+          wx:if="{{!isHideInput && isStaff}}"
+          placeholder="输入工单名称"
+          input-box-class="create_input"
+          input-class="name_input"
+          inputValue="{{formData.orderName}}"
+          data-key="orderName"
+          isShowRightSlot="{{false}}"
+          isShowDel="{{false}}"
+          bind:inputFunc="handleInput"
+        >
+          <!-- <i class="name_icon new-iconfont icon-theme" slot="left"></i> -->
+          <image slot="left" class="name_icon" src="{{newImgUrl}}text.png" />
+        </custom-input>
+        <!-- 服务类型 -->
+        <service-type-input 
+          wx:if="{{isStaff}}"
+          service-type-box="create-service-type"
+          institutionId="{{institutionId}}"
+          serviceType="{{typeInfo.serviceType}}"
+          firstType="{{formData.orderSecondTypeName}}"
+          secondType="{{formData.orderThirdlyTypeName}}"
+          isRequired="{{workOrderWxs.includes(requiredField, 'serviceType')}}"
+          bind:closeSelectType="showInput"
+          bind:showServiceType="showServiceType"
+          bind:updateServiceType="getServiceType"
+        />
+        <!-- <custom-input
+          disabled
+          wx:if="{{!isHideInput && isStaff}}"
+          input-box-class="create_input"
+          input-class="other_input"
+          placeholder="一级分类 > 二级分类"
+          isShowRightSlot="{{false}}"
+          inputValue="{{multiShowText}}"
+          bind:tap="showServiceType"
+        >
+          <view slot="left" class="key {{workOrderWxs.includes(requiredField, 'serviceType') && 'red_star'}}">服务类型</view>
+        </custom-input> -->
+        <!-- <template wx:if="{{!isHideInput && isStaff}}" is="serviceTypeInput" data="{{firstType: formData.orderSecondTypeName, secondType: formData.orderThirdlyTypeName}}"></template> -->
+        <!-- 加急 -->
+        <view class="key_val" wx:if="{{isStaff}}">
+          <view class="key flex1">加急</view>
+          <view class="">
+            <van-switch custom-class="urgent_switch" active-color="{{appStyle.themeColor}}" inactive-color="#A1A9B3" size="48rpx" checked="{{isUrgent}}" bind:change="changeUrgent" />
+          </view>
+        </view>
+      </view>
+      <view class="handle_block">
+        <!-- 地点 -->
+        <custom-input
+          disabled
+          wx:if="{{!isHideInput}}"
+          placeholder="选择工单地点"
+          input-box-class="create_input"
+          input-class="other_input"
+          inputValue="{{address}}"
+          bind:tap="getAddress"
+        >
+          <view slot="left" class="key {{workOrderWxs.includes(requiredField, 'homeAddress') && 'red_star'}}">地点</view>
+          <i slot="right" class="new-iconfont icon-arrowRight dark40"></i>
+        </custom-input>
+        <!-- 所属场地 -->
+        <custom-input
+          disabled
+          wx:if="{{!isHideInput && isStaff}}"
+          placeholder="只读"
+          input-box-class="create_input"
+          input-class="other_input"
+          inputValue="{{area.areaName}}"
+          data-key="orderName"
+          bind:inputFunc="handleInput"
+          bind:tap="showMorePlace"
+        >
+          <view slot="left" class="key">所属场地</view>
+          <i wx:if="{{areaData.length > 1}}" slot="right" class="new-iconfont icon-arrowRight dark40"></i>
+        </custom-input>
+        <!-- 上门时间 -->
+        <custom-input
+          disabled
+          wx:if="{{!isHideInput}}"
+          placeholder="选择期望上门时间"
+          input-box-class="create_input border_bottom0"
+          input-class="other_input"
+          inputValue="{{timeMultiShowText}}"
+          bind:tap="showVisitTime"
+        >
+          <view slot="left" class="key">上门时间</view>
+          <i slot="right" class="new-iconfont icon-arrowRight dark40"></i>
+        </custom-input>
+      </view>
+      <!-- 图片 -->
+      <view class="handle_block upload_block">
+        <new-upload-images 
+          moduleName="wfs"
+          deleteType="{{2}}"
+          businessCodes="{{['GDGL']}}"
+          imgObjArr="{{imgList}}"
+          isAddicon="{{imgList.length < 10}}"
+          sourceType="{{['camera', 'album']}}" 
+          cameras="{{['camera', 'watermarkCamera']}}" 
+          bind:callback="handleImg"
+        ></new-upload-images>
+      </view>
+      <!-- 语音 -->
+      <view class="handle_block">
+        <view class="key_val">
+          <view class="key">语音</view>
+          <view class="val">
+            <new-record
+              deleteType="{{2}}"
+              moduleName="wfs" 
+              voiceList="{{voiceList}}"
+              bind:callBackFunc="callBackFunc" 
+              bind:hideFunc="hideFunc"
+            ></new-record>
+          </view>
+        </view>
+      </view>
+      <!-- 备注 -->
+      <view class="handle_block">
+        <view class="key_val border_bottom1">
+          <view class="key {{workOrderWxs.includes(requiredField, 'remark') && 'red_star'}}">问题描述</view>
+          <view class="val" wx:if="{{isOpen}}">
+            <!-- <new-record
+              format="wav" 
+              deleteType="{{2}}"
+              moduleName="wfs" 
+              defBtnText="语音文字" 
+              voiceList="{{remarkVoiceList}}"
+              numberOfChannels="{{1}}"
+              bind:callBackFunc="getVoice" 
+              bind:hideFunc="hideFunc"
+            ></new-record> -->
+            <new-record 
+              isToTxt="{{true}}" 
+              defBtnText="语音文字" 
+              bind:isToTxtCallBack="isToTxtCallBack" 
+              bind:hideFunc="hideFunc"
+            />
+          </view>
+        </view>
+        <view class="textarea_block">
+          <textarea 
+            maxlength="{{200}}"
+            wx:if="{{!isHideInput}}"
+            class="val textarea remark_textarea" 
+            style="{{!formData.remark && 'opacity: 0.6'}}"
+            auto-height="{{true}}"
+            placeholder-class="textarea_placeholder"
+            placeholder="输入问题描述" 
+            value="{{formData.remark}}" 
+            data-key="remark" 
+            bind:input="textareaInput"
+          ></textarea>
+          <view class="over_num"><text wx:if="{{formData.remark.length}}">{{formData.remark.length}}/</text>200</view>
+        </view>
+      </view>
+      <!-- 维修工单类型特有 -->
+      <view class="handle_block" style="padding: 0;" wx:if="{{isWXGD && isStaff}}">
+        <view class="device_title">
+          <view class="key">设备信息</view>
+          <view class="handles">
+            <scan-code slot="right" bind:scanCallback="scanCallback" isDefault="{{false}}">
+              <i class="new-iconfont icon-scan themeColor" style="font-size: 44rpx"></i>
+            </scan-code>
+            <i class="del_icon new-iconfont icon-a-delete2" wx:if="{{formData.equipmentCode}}"></i>
+          </view>
+        </view>
+        <view class="device_con" wx:if="{{formData.equipmentCode}}">
+          <custom-input
+            disabled
+            wx:if="{{!isHideInput}}"
+            placeholder="扫描二维码获取设备编码"
+            input-box-class="create_input"
+            input-class="other_input"
+            inputValue="{{formData.equipmentCode}}"
+          >
+            <view slot="left" class="key">设备编码</view>
+          </custom-input>
+          <custom-input
+            disabled
+            wx:if="{{!isHideInput}}"
+            placeholder="扫描二维码获取设备名称"
+            input-box-class="create_input"
+            input-class="other_input"
+            inputValue="{{formData.equipmentName}}"
+          >
+            <view slot="left" class="key">设备名称</view>
+          </custom-input>
+          <view class="textarea_block">
+            <!-- <view class="key">维保详情</view> -->
+            <textarea 
+              class="val textarea" 
+              wx:if="{{!isHideInput}}"
+              style="{{!formData.maintenanceDetails && 'opacity: 0.6'}}"
+              auto-height="{{true}}"
+              maxlength="{{200}}"
+              placeholder-class="textarea_placeholder"
+              placeholder="输入维保详情" 
+              value="{{formData.maintenanceDetails}}" 
+              data-key="maintenanceDetails" 
+              bind:input="textareaInput"
+            ></textarea>
+            <view class="over_num"><text wx:if="{{formData.maintenanceDetails.length}}">{{formData.maintenanceDetails.length}}/</text>200</view>
+          </view>
+        </view>
+        <view class="no_device" wx:else>
+          <image class="icon" src="{{newImgUrl}}noDeviceData.png" />
+          <view class="no_data_desc dark">{{noDeviceTxt}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="btn_box">
+      <template is="bigBtn" data="{{btnText: '提交工单', bigBtnTap: 'handleCreate'}}"></template>
+    </view>
+  </view>
+</view>
+<select-order-type show="{{isShowSelectType}}" currTypeId="{{typeInfo.id}}" typeList="{{typeList}}" bind:close="showInput" bind:updateType="updateType" />
+<!-- <select-service-type show="{{isShowServiceType}}" serviceType="{{typeInfo.serviceType}}" institutionId="{{institutionId}}" bind:close="showInput" bind:sure="getServiceType" /> -->
+<select-visit-time show="{{isShowVisitTime}}" bind:close="showInput" bind:sure="getVisitTime" />
+<select-place show="{{isShowMorePlace}}" currPlaceId="{{area.areaId}}" placeList="{{areaData}}" bind:close="showInput" bind:updatePlace="updatePlace" />
+<complete-order show="{{isShowComplete}}" orderInfo="{{orderInfo}}" bind:close="showInput" bind:reset="reset" />
+<!-- <common-address show="{{isShowAddress}}" /> -->

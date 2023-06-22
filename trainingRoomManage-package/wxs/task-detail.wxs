@@ -1,0 +1,21 @@
+function strSplitTime(value, type) {
+    if(!value){return ''}
+  if (type == "y") {
+    return value.split(' ')[0]
+  } else if (type == "h") {
+    return value.split(' ')[1].split(':')[0]
+  } else if (type == "m") {
+    return value.split(' ')[1].split(':')[1]
+  }else if (type == "s") {
+    return value.split(' ')[1].split(':')[2]
+  }else if (type == "other") {
+   var str= value.split(',')[0]
+   if(str.length>20){
+       return str.slice(0,20)+"..."
+   }
+    return str
+  }
+}
+module.exports = {
+  strSplitTime: strSplitTime,
+}

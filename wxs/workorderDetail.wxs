@@ -1,0 +1,93 @@
+//工单详情（员工、客户、游客）pages/staff-workorder-detail/staff-workorder-detail、pages/client-workorder-detail/client-workorder-detail
+function formatDateTime(datetimeStr) {
+    var datetimeRegexp = getRegExp('\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}');
+    var result = {
+        date: '',
+        time: ''
+    };
+    if (datetimeRegexp.test(datetimeStr)) {
+        var tmpArr = datetimeStr.split(' ');
+        result = {
+            date: tmpArr[0],
+            time: tmpArr[1].substring(0, 5)
+        };
+    }
+    return result;
+}
+
+function operateTypeNameText(str) {
+    var text = '';
+    if (str == 'TRANSFER_ORDER') text = '审核意见：';
+    if (str == 'DISPOSE_ORDER') text = '处理过程：';
+    if (str == 'AUDIT_ORDER') text = '审核意见：';
+    if (str == 'RETURN_VISIT') text = '回访详情：';
+    if (str == 'URGENT_ORDER') text = '加急详情：';
+    if (str == 'ORDER_CB') text = '催办意见：';
+    if (str == 'ORDER_GQ') text = '挂起原因：';
+    if (str == 'ORDER_TJXT' || str == 'SEND_BACK' || str == 'ORDER_GQ') text = '审核意见：';
+    if (str == 'SUPERVISION_ORDER') text = '督办意见：';
+    if (str == 'EVALUATE_ORDER') text = '评价意见：';
+    if (str == 'ORDER_QX') text = '取消原因：';
+    return text;
+}
+
+function isSelectedOperation(selectedOperation, state) {
+    var result;
+    if (selectedOperation.indexOf(state) == -1) {
+        result = false;
+    } else {
+        result = true;
+    }
+
+    return result;
+}
+
+
+
+function showBtnArr(selectedOperation, workorderDetailInfo) {
+
+    var btnArr = [];
+    if (isSelectedOperation(selectedOperation, 0) && workorderDetailInfo.personNum <= 1) {
+        btnArr.unshift({
+            text: "转单",
+            icon: "icon-switch",
+            extdata: 'transferOrder',
+            handleKey: 'selectionHandler',
+        })
+    }
+    if (isSelectedOperation(selectedOperation, 2) && workorderDetailInfo.personNum <= 1) {
+        btnArr.unshift({
+            text: "退回",
+            icon: "icon-back",
+            extdata: 'sendback',
+            handleKey: 'handleShowPopup',
+        }, )
+    }
+    if (isSelectedOperation(selectedOperation, 3) && workorderDetailInfo.personNum <= 1) {
+        btnArr.unshift({
+            text: "挂起",
+            icon: "icon-information",
+            extdata: 'suspend',
+            handleKey: 'handleShowPopup',
+        }, )
+    }
+    if (isSelectedOperation(selectedOperation, 1) && workorderDetailInfo.personNum <= 1) {
+        btnArr.unshift({
+            text: "协同",
+            icon: "icon-reback",
+            extdata: 'addCollaborators',
+            handleKey: 'selectionHandler',
+        }, )
+    }
+
+
+    return btnArr
+
+}
+
+module.exports = {
+    formatDateTime: formatDateTime,
+    operateTypeNameText: operateTypeNameText,
+    isSelectedOperation: isSelectedOperation,
+    showBtnArr: showBtnArr
+};

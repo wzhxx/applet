@@ -1,0 +1,443 @@
+function formatDateTime(datetimeStr) {
+    var datetimeRegexp = getRegExp('\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}');
+    var result = {
+        date: '',
+        time: ''
+    };
+    if (datetimeRegexp.test(datetimeStr)) {
+        var tmpArr = datetimeStr.split(' ');
+        result = {
+            date: tmpArr[0],
+            time: tmpArr[1].substring(0, 5)
+        };
+    }
+    return result;
+}
+
+function formatFlowsRemark(str) {
+    var strArr = str.split('<br>');
+
+    return strArr;
+}
+
+function checkSupervise(str) {
+    return str && str.toLocaleLowerCase().indexOf('supervise') !== -1
+}
+
+function setHandleName(num) {
+    var obj = [
+        '提交培训记录',
+        '审核培训记录',
+        '提交实操记录',
+        '提交培训记录',
+        '审核实操记录',
+        '提交演练报告',
+        '提交实操记录',
+        '审核演练报告', //可查看演练报告
+        '提交反馈与总结',
+        '提交演练报告',
+        '审核反馈与总结',
+        '',
+        '提交反馈与总结',
+    ]
+    return obj[num];
+}
+
+function setOrderStatus(status) {
+    var arr = {
+        '1': '待提交',
+        '2': '待审核',
+        '4': '已完成',
+        '5': '异常结束', //可查看演练报告
+        '6': '审核驳回',
+        '7': '已关闭',
+        '8': '已撤回',
+        '11': '待接单'
+    }
+    return arr[status + ''];
+}
+
+function setOverTimeStatusName(status) {
+    var obj = [
+        '', //无 则不展示
+        '已超时',
+        '超时待审核',
+        '超时完成',
+    ]
+    return obj[status];
+}
+
+function setTaskTranName(status, userName) {
+    var str = '';
+    if ([3, 9, 11, 13, 15, 22,23].indexOf(status) > -1) {
+        str += '审核人：';
+        str += userName;
+    } else if ([4, 8, 10, 12, 14, 21].indexOf(status) > -1) {
+        str += '处理人：';
+        str += userName;
+    } else if (status == 1) {
+        str += '系统创建';
+    } else if (status == 17) {
+        str += '接单人：';
+        str += userName;
+    } else if (status == 18) {
+        str += '转单人：';
+        str += userName;
+    } else if (status == 19) {
+        str += '转审人：';
+        str += userName;
+    } else if (status == 20) {
+        str += userName;
+    }
+    return str;
+}
+
+function checkBtnShow(status) {
+    var showStatus = 0; //默认为 0 不展示按钮 1 提交类型按钮 2 审核类按钮
+    switch (+status) {
+        case 0:
+        case 2:
+        case 3:
+        case 5:
+        case 6:
+        case 8:
+        case 9:
+        case 12:
+            showStatus = 1;
+            break;
+        case 1:
+        case 4:
+        case 7:
+        case 10:
+            showStatus = 2;
+            break;
+        default:
+            showStatus = 0
+            break;
+    }
+    return showStatus;
+}
+// feedbackRequirements 反馈要  arrary    isNeedReview 是否需要审核 status当前状态
+function newCheckBtnShow(feedbackRequirements, isNeedReview, status) {
+    var showArr = [];
+    // 应急演练培训
+    if (feedbackRequirements.indexOf('1') != -1 && [0, 1, 3].indexOf(status) != -1) {
+        showArr.push(0, 3);
+        if (isNeedReview) {
+            showArr.push(1);
+        }
+    }
+    // 应急演练实操记录
+    if (feedbackRequirements.indexOf('2')) {
+        showArr.push(2, 4);
+        if (isNeedReview) {
+            showArr.push(6);
+        }
+    }
+    // 应急演练报告  演练报告必要审核
+    if (feedbackRequirements.indexOf('3')) {
+        showArr.push(5, 7, 9);
+    }
+    // 反馈与总结
+    if (feedbackRequirements.indexOf('4')) {
+        showArr.push(8, 10);
+        if (isNeedReview) {
+            showArr.push(12);
+        }
+    }
+}
+
+function setFeedbackRequirementsName(str) {
+    var strName = '';
+    if (typeof str === 'string') {
+        if (str.indexOf('1') != -1) {
+            strName += '应急演练培训记录,';
+        }
+        if (str.indexOf('2') != -1) {
+            strName += '应急演练实操记录,';
+        }
+        if (str.indexOf('3') != -1) {
+            strName += '应急演练报告,';
+        }
+        if (str.indexOf('4') != -1) {
+            strName += '反馈与总结,';
+        }
+    }
+    if (strName) {
+        strName = strName.substring(0, strName.length - 1);
+    }
+    return strName;
+}
+
+/**
+ * 审核按钮显示
+ * @param type 类型
+ * @param isNeedReview 是否需要审核按钮
+ * @param processStatus 步骤状态
+ * @param feedbackRequirements 反馈要求
+ * @param userId 当前登录用户id
+ * @param auditorUserId 当前任务中的审核人id
+ * @param isCurAuditUser 当前人是否是审核人
+ */
+function reviewAuth(type, isNeedReview, processStatus, feedbackRequirements, userId, auditorUserId, isCurAuditUser) {
+    var isReview = isNeedReview == 1; //是否需要审核
+    var isCurDealPerson = auditorUserId && auditorUserId.indexOf(userId) >= 0; //是否是当前审核人
+    var isCurConfigDealPerson = isCurAuditUser; //判断参数配置里面是否有当前登录人可进行审核
+    if (isReview) {
+        if (type == 1 && isCurDealPerson) { //审核培训记录
+            return [1].indexOf(processStatus) >= 0
+        } else if (type == 2 && isCurDealPerson) { //审核实操记录
+            return [4].indexOf(processStatus) >= 0
+        } else if (type == 3 && (isCurDealPerson || isCurConfigDealPerson)) { //审核演练报告
+            return [7].indexOf(processStatus) >= 0
+        } else if (type == 4 && isCurDealPerson) {
+            return [10].indexOf(processStatus) >= 0
+        }
+    } else {
+        if ((isCurDealPerson || isCurConfigDealPerson) && feedbackRequirements.indexOf('2') >= 0) {
+            if (type == 2) { //审核演练报告
+                return [4].indexOf(processStatus) >= 0
+            }
+        }
+    }
+}
+
+
+function taskShowBtn(statusList, processStatus, feedbackRequirements, feedback, type) {
+    if (processStatus === 0) { //初始状态都为0的情况下
+        if (feedbackRequirements[0] == feedback && feedback === '1') { //第一步是提交演练
+            return true;
+        } else if (feedbackRequirements[0] == feedback && feedback === '2') {
+            return true;
+        } else if (feedbackRequirements[0] == feedback && feedback === '3') {
+            return true;
+        } else if (feedbackRequirements[0] == feedback && feedback === '4') {
+            return true;
+        }
+        return false;
+    } else { //有状态了
+        if (statusList.indexOf(processStatus) != -1) {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+function showBtn(taskStatus, arr, type) {
+    if (type == 'user') {
+        var userStr = ((arr || '').slice((arr || '').length - 1) === ',') ? arr.slice(0, -1) : arr;
+        return userStr.indexOf(taskStatus) > -1
+    }
+
+    return arr.indexOf(taskStatus) > -1
+}
+
+function showWithdrawBtn2(userId, cultivateDetail, practicalDetail, feedDetail) {
+    if (cultivateDetail.id) {
+
+    }
+    if (practicalDetail.id) {
+
+    }
+    if (practicalDetail.id) {
+
+    }
+
+}
+
+function showWithdrawBtn(taskInfo) {
+    var arr = {
+        '1': [1, 10].indexOf(taskInfo.processStatus) > -1,
+        '1,2': [2, 4, 10].indexOf(taskInfo.processStatus) > -1,
+        '1,4': [2, 8, 10].indexOf(taskInfo.processStatus) > -1,
+        '1,2,4': [2, 8, 10].indexOf(taskInfo.processStatus) > -1,
+        '2': [4, 10].indexOf(taskInfo.processStatus) > -1,
+        '2,4': [8, 10].indexOf(taskInfo.processStatus) > -1,
+        '4': taskInfo.processStatus == 10,
+    }
+    return arr[taskInfo.feedbackRequirements]
+}
+
+/**
+ * 提交按钮权限
+ * @param type 类型
+ * @param feedbackRequirements 反馈要求
+ * @param processStatus 步骤状态
+ * @param idCurDealUser 是否是当前处理人
+ */
+function submitAuth(type, feedbackRequirements = '', processStatus, idCurDealUser) {
+    if (!idCurDealUser) {
+        return false
+    } //是否是当前处理人
+
+    if (type === 1) {
+        var isExist = feedbackRequirements.indexOf('1') >= 0 //反馈要求中是否存在提交演练报告
+        return [0, 3, 17].indexOf(processStatus) >= 0 && isExist; //如果反馈要求中有提交培训，且任务进度为0，就显示提交培训记录按钮
+    } else if (type === 2) {
+        if (feedbackRequirements === '2') { //反馈要只有2,则直接显示提交实操记录按钮
+            return [0, 6, 17].indexOf(processStatus) >= 0;
+        } else if (feedbackRequirements.indexOf('1') >= 0) { //如果有提交培训记录
+            return [2, 6].indexOf(processStatus) >= 0; //如果培训审核通过后显示该按钮，或者实操记录被驳回也显示该按钮
+        } else if (!feedbackRequirements.indexOf('1') >= 0 && feedbackRequirements.indexOf('2') >= 0) {
+            return [0, 6, 17].indexOf(processStatus) >= 0; //反馈要求可能是：【2,3】【2,4】【2,3,4】情况
+        }
+    } else if (type === 3) {
+        if (feedbackRequirements.indexOf('3') >= 0) {
+            return [5, 9].indexOf(processStatus) >= 0;
+        }
+    } else if (type === 4) {
+        if (feedbackRequirements === '4') { //反馈要只有4,则直接显示提交反馈与总结按钮
+            return [0, 12, 17].indexOf(processStatus) >= 0;
+        } else {
+            return [8, 12].indexOf(processStatus) >= 0
+        }
+    }
+}
+
+// 内容展示判断
+function checkInfoShow(list, str) {
+    if (list.indexOf(str) != -1) {
+        return true;
+    }
+    return false;
+}
+
+
+function dealArr() {
+
+}
+
+function showOperateBtn(taskInfo, showTransferOrder,userId,submitUserId) {
+    var btnArr = []
+    if (showTransferOrder) {
+        btnArr.unshift({
+            text: "转单",
+            icon: "icon-switch",
+            extdata: 'transferOrder',
+            handleKey: 'handleTransferOrder',
+        })
+    }
+
+    console.log('撤回按钮用户',userId,submitUserId);
+    if (showWithdrawBtn(taskInfo)&&userId==submitUserId) {
+        btnArr.unshift({
+            text: "撤回",
+            icon: "icon-back",
+            extdata: '0',
+            handleKey: 'handleShowWithdraw',
+        }, )
+    }
+    return btnArr
+}
+
+
+function showMainBtn(taskInfo, isCurDealUser) {
+    if (submitAuth(1, taskInfo.feedbackRequirements, taskInfo.processStatus, isCurDealUser)) {
+        return {
+            name: '提交培训记录',
+            type: 0
+        }
+    }
+    if (submitAuth(2, taskInfo.feedbackRequirements, taskInfo.processStatus, isCurDealUser)) {
+        return {
+            name: '提交实操记录',
+            type: 2
+        }
+    }
+    if (submitAuth(3, taskInfo.feedbackRequirements, taskInfo.processStatus, isCurDealUser)) {
+        return {
+            name: '提交演练报告',
+            type: 5
+        }
+    }
+    if (submitAuth(4, taskInfo.feedbackRequirements, taskInfo.processStatus, isCurDealUser)) {
+        return {
+            name: '提交反馈与总结',
+            type: 8
+        }
+    }
+}
+
+function showReSubmitBtn(cultivateDetail, practicalDetail, feedDetail, taskInfo) {
+    var subBtn = []
+    if (cultivateDetail.id && showBtn(1, taskInfo.feedbackRequirements)) {
+        subBtn.push({
+            btnText: '培训记录',
+            extClass: 'light_btn',
+            btnTap: 'toSubmitPage',
+            btnRightIcon: 'icon-edit',
+            extdata:'isEdit_0'
+        })
+
+    }
+    if (practicalDetail.id&&showBtn(2,taskInfo.feedbackRequirements)) {
+        subBtn.push({
+            btnText: '实操记录',
+            extClass: 'light_btn',
+            btnTap: 'toSubmitPage',
+            btnRightIcon: 'icon-edit',
+            extdata:'isEdit_2'
+        })
+
+    }
+    if (feedDetail.id&&showBtn(4,taskInfo.feedbackRequirements)) {
+        subBtn.push({
+            btnText: '反馈与总结',
+            extClass: 'light_btn',
+            btnTap: 'toSubmitPage',
+            btnRightIcon: 'icon-edit',
+            extdata:'isEdit_8'
+        })
+    }
+
+return subBtn
+}
+
+function taskName(taskList){
+    var nameArr=[]
+    if(!taskList||taskList.length==0){
+        return ''
+    }else{
+        taskList.forEach( function(item){
+            nameArr.push(item.taskName)
+        })
+    }
+
+  return nameArr.toString()
+}
+function setText(val) {
+    if (val != null && val != "") {
+      var re1 = getRegExp("<.+?>|&.+?;","g"); //匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
+      var msg = val.replace(re1,""); //执行替换成空字符
+    //   msg = msg.replace(/\s/g,""); //去掉所有的空格（中文空格、英文空格都会被替换）
+      msg = msg.replace(getRegExp("[\r\n]","g"),""); //去掉所有的换行符
+      return msg
+    } else return ''
+  }
+
+module.exports = {
+    formatDateTime: formatDateTime,
+    formatFlowsRemark: formatFlowsRemark,
+    checkSupervise: checkSupervise,
+    setHandleName: setHandleName,
+    setOrderStatus: setOrderStatus,
+    setOverTimeStatusName: setOverTimeStatusName,
+    setTaskTranName: setTaskTranName,
+    checkBtnShow: checkBtnShow,
+    newCheckBtnShow: newCheckBtnShow,
+    setFeedbackRequirementsName: setFeedbackRequirementsName,
+    taskShowBtn: taskShowBtn,
+    submitAuth: submitAuth,
+    checkInfoShow: checkInfoShow,
+    reviewAuth: reviewAuth,
+    showBtn: showBtn,
+    showWithdrawBtn: showWithdrawBtn,
+    showWithdrawBtn2: showWithdrawBtn2,
+    dealArr: dealArr,
+    showOperateBtn: showOperateBtn,
+    showMainBtn: showMainBtn,
+    showReSubmitBtn: showReSubmitBtn,
+    taskName:taskName,
+    setText:setText
+};

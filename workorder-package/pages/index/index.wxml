@@ -1,0 +1,79 @@
+<import src="../../../static/templates/template.wxml"></import>
+<import src="./templates/index.wxml"></import>
+<wxs src="../../wxs/index.wxs" module="workOrderWxs" />
+<view class="home_box">
+  <mp-navigation-bar back="{{false}}" background="{{appStyle.themeColor}}" id="workorderNavBar">
+    <view slot="left" bind:tap="back" class="title_btn flex_center">
+      <i class="new-iconfont icon-back2" style="font-size: 44rpx;margin-right: 24rpx;"></i>
+      <text class="nav_title">综合工单</text>
+    </view>
+  </mp-navigation-bar>
+  <view class="status_tab flex_center {{showOperate?'status_tab_hasOperate':''}}">
+    <view class="tab_item flex_center" data-doing="{{true}}" bind:tap="showFilterOrder">
+      <image class="icon" src="{{newImgUrl}}GD_DOING.png" />
+      <view class="desc_box">
+        <view class="status">进行中</view>
+        <view class="status_tips">所有进行中的工单</view>
+      </view>
+    </view>
+    <view class="tab_item flex_center" data-doing="{{false}}" bind:tap="showFilterOrder">
+      <image class="icon" src="{{newImgUrl}}DG_DONE.png" />
+      <view class="desc_box">
+        <view class="status">已结束</view>
+        <view class="status_tips">完成或关闭的工单</view>
+      </view>
+    </view>
+    <view wx:if="{{!hasAutoOrder&&!hasDirectDispatch}}" class="create_btn1" bind:tap="goCreateOrder">
+      <i class="add_icon new-iconfont icon-increase"></i>
+      <text>创建工单</text>
+    </view>
+  </view>
+  <view class="theme-box" wx:if="{{hasAutoOrder||hasDirectDispatch}}">
+    <view class="operate-box">
+      <view class="operate-item" bind:tap="goCreateOrder">
+        <i class="new-iconfont icon-work1"></i>
+        <text>下单</text>
+      </view>
+      <view wx:if="{{hasAutoOrder}}" class="operate-item" data-type="autoOrder" bind:tap="goOtherCreateOrder">
+        <i class="new-iconfont icon-work2"></i>
+        <text>处理</text>
+      </view>
+      <view wx:if="{{hasDirectDispatch}}" class="operate-item" data-type="directDispatch" bind:tap="goOtherCreateOrder">
+        <i class="new-iconfont icon-work3"></i>
+        <text>派单</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="report_box {{showOperate?'report_box_hasOperate':''}}">
+    <view bind:tap="goReport" wx:if="{{hasReport}}" class="go_report flex_center" style="background: {{appStyle.themeColor}} url('{{newImgUrl}}report_bg.png') no-repeat; background-size: 100%;">
+      <view class="left">
+        <view class="sub_title">统计分析</view>
+        <view class="desc">查看数据报表</view>
+      </view>
+      <view class="right">
+        <i class="new-iconfont icon-back2"></i>
+      </view>
+    </view>
+  </view>
+  <van-sticky offset-top="{{navBarHeight}}" bind:scroll="stickScroll">
+    <view class="list_box">
+      <view class="header flex_center">
+        <view class="key">我的待办工单</view>
+        <view class="filter_box flex_center" bind:tap="showDoingOrder">
+          <text>全部</text>
+          <i class="new-iconfont icon-arrowRight"></i>
+        </view>
+      </view>
+      <view class="list_con" style="height: calc(100vh - 104rpx - {{navBarHeight}}px);">
+        <template is="orderList" data="{{...listInfo}}"></template>
+      </view>
+    </view>
+  </van-sticky>
+  <view class="create_btn2" style="bottom: {{listInfo.isFixed ? appStyle.margin48 : '-200px'}}" bind:tap="goCreateOrder">
+    <i class="new-iconfont icon-publish"></i>
+  </view>
+</view>
+<filter-order show="{{isShowFilterOrder}}" isDoing="{{isDoing}}" navBarHeight="{{navBarHeight}}" institutionId="{{institutionId}}" userId="{{userId}}" />
+<!-- 代办工单 -->
+<doing-order show="{{isShowDoingOrder}}" navBarHeight="{{navBarHeight}}" institutionId="{{institutionId}}" userId="{{userId}}" />

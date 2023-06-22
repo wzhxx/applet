@@ -1,0 +1,13 @@
+function getTxt(chooseObj, curType){
+
+    console.log(chooseObj[curType],);
+  if( chooseObj[curType]){
+    return chooseObj[curType].buildingName
+  }else {
+    return ''
+  }
+}
+
+module.exports = {
+  getTxt: getTxt
+}

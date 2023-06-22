@@ -1,0 +1,37 @@
+function formatDateTime(datetimeStr) {
+    var datetimeRegexp = getRegExp('\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}');
+    var result = {
+        date: '',
+        time: ''
+    };
+    if (datetimeRegexp.test(datetimeStr)) {
+        var tmpArr = datetimeStr.split(' ');
+        result = {
+            date: tmpArr[0],
+            time: tmpArr[1].substring(0, 5)
+        };
+    }
+    return result;
+}
+
+function formatFlowsRemark(str) {
+    var strArr = str.split('<br>');
+
+    return strArr;
+}
+
+function checkSupervise(str) {
+    return str && str.toLocaleLowerCase().indexOf('supervise') !== -1
+}
+
+function dealArr(arr, target) {
+    return arr.indexOf(target) > -1
+
+}
+
+module.exports = {
+    formatDateTime: formatDateTime,
+    formatFlowsRemark: formatFlowsRemark,
+    checkSupervise: checkSupervise,
+    dealArr:dealArr
+};

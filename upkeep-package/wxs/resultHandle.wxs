@@ -1,0 +1,7 @@
+function isAuditStatus(isAuditUser, status){
+  var isAuditer = isAuditUser === 'Y'
+  return isAuditer && status === 'AUDIT'
+}
+module.exports = {
+  isAuditStatus: isAuditStatus,
+}

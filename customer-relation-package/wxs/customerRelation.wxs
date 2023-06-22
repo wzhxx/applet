@@ -1,0 +1,78 @@
+var buttonList = {
+        ORDER_DPD: [{
+                name: "不受理",
+                type: "bsl",
+                class: 'white_btn',
+                value: 1,
+                status: "ORDER_DPD"
+            },
+            {
+                name: "派单",
+                type: "pd",
+                value: 2,
+                status: "ORDER_DPD"
+            },
+        ],
+        ORDER_DJD: [{
+            name: "接单",
+            type: "jd",
+            value: 1,
+            status: "ORDER_DJD"
+        }, ],
+        ORDER_CLZ: [{
+                name: "转单",
+                type: "cl_zd",
+                class: 'white_btn',
+                value: 1,
+                status: "ORDER_CLZ"
+            }, // 未处理
+            {
+                name: "提交",
+                type: "cl_tj",
+                value: 1,
+                status: "ORDER_CLZ"
+            },
+        ],
+        ORDER_FGZ: [{
+                name: "转单",
+                type: "cl_zd",
+                class: 'white_btn',
+                value: 1,
+                status: "ORDER_CLZ"
+            }, // 未处理
+            {
+                name: "提交",
+                type: "cl_tj",
+                value: 1,
+                status: "ORDER_CLZ"
+            },
+        ],
+        ORDER_AUDIT_CL: [{
+            name: "审批",
+            type: "sp",
+            value: 1,
+            status: "ORDER_AUDIT_CL"
+        }, ],
+        ORDER_AUDIT_ZD: [{
+            name: "审批",
+            type: "sp",
+            value: 1,
+            status: "ORDER_AUDIT_ZD"
+        }, ],
+        ORDER_DPJ: [{
+            name: "评价",
+            type: "pj",
+            value: 1,
+            status: "ORDER_DPJ"
+        }, ],
+        ORDER_DHF: [{
+            name: "回访",
+            type: "hf",
+            value: 1,
+            status: "ORDER_DHF"
+        }, ]
+    }
+
+    module.exports ={
+        buttonList: buttonList
+    }

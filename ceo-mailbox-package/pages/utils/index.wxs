@@ -1,0 +1,13 @@
+function formatFlowsTitle(str) {
+    if(!str) return ''
+    if(str.length>25){
+        return str.substring(0,26)+'...'
+    }
+   
+  return str
+
+  }
+
+  module.exports={
+    formatFlowsTitle:formatFlowsTitle
+  }

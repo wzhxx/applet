@@ -1,0 +1,26 @@
+function isArray(array) {
+    return array && array.constructor === 'Array';
+}
+
+function filterNum(array, filterArr) {
+    var num = 0
+    if (!isArray(array) || !isArray(filterArr)) {
+    } else {
+        for (var i = 0; i < array.length; i++) {
+            for (var j = 0; j < filterArr.length; j++) {
+                if (array[i] == filterArr[j]) {
+                    num = num + 1
+                }
+            }
+        }
+    }
+    return num
+}
+
+function getLength(arrayStr){
+    return JSON.parse(arrayStr).length
+}
+
+
+module.exports.filterNum = filterNum;
+module.exports.getLength = getLength;

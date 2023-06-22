@@ -1,0 +1,745 @@
+{
+  "pages": [
+    "pages/login-enter/login-enter",
+    "pages/secondarymenu-manage/secondarymenu-manage",
+    "pages/index/index",
+    "pages/switch-project/switch-project",
+    "pages/setting/setting",
+    "pages/personal-data/personal-data",
+    "pages/register/register",
+    "pages/forget-password/forget-password",
+    "pages/phone-book/phone-book",
+    "pages/about/about",
+    "pages/signature/signature",
+    "pages/message/message",
+    "pages/authorization/authorization",
+    "pages/selection-building-cell/selection-building-cell",
+    "pages/rooms/rooms",
+    "pages/selection-type-dept/selection-type-dept",
+    "pages/selection-materials/selection-materials",
+    "pages/location-info/location-info",
+    "pages/location/location",
+    "pages/agreement/agreement",
+    "pages/binding/binding",
+    "pages/auth-manage/auth-manage",
+    "pages/room-info/room-info",
+    "pages/visitor-login/visitor-login",
+    "pages/location-list/location-list",
+    "pages/IDCode/IDCode",
+    "pages/selection-position/selection-position",
+    "pages/task-center/task-center",
+    "pages/watermark-camera/watermark-camera",
+    "pages/transfer-page/transfer-page",
+    "pages/my-skill/my-skill",
+    "pages/edit-skill/edit-skill"
+  ],
+  "subPackages": [
+    {
+      "root": "medicalwaste-package",
+      "name": "medicalwastePackage",
+      "pages": [
+        "pages/client-medicalwaste-detail/client-medicalwaste-detail",
+        "pages/client-medicalwasteinfo-detail/client-medicalwasteinfo-detail",
+        "pages/sign/sign",
+        "pages/medicalwaste-code-details/medicalwaste-code-details"
+      ]
+    },
+    {
+      "root": "warehouse-package",
+      "name": "warehousePackage",
+      "pages": [
+        "pages/index/index",
+        "pages/material-detail/material-detail",
+        "pages/in-order/in-order",
+        "pages/out-order/out-order",
+        "pages/put-index/put-index",
+        "pages/out-index/out-index",
+        "pages/order-detail/order-detail",
+        "pages/storehouse-search/storehouse-search",
+        "pages/search-page/search-page",
+        "pages/personalhouse-search/personalhouse-search",
+        "pages/material-car/material-car",
+        "pages/picking-car/picking-car",
+        "pages/return-car/return-car",
+        "pages/selection-handler/selection-handler",
+        "pages/authorized-user/authorized-user",
+        "pages/accurate-search/accurate-search",
+        "pages/finish/finish"
+      ]
+    },
+    {
+      "root": "polling-package",
+      "name": "pollingPackage",
+      "pages": [
+        "pages/staff-patrolinspection-detail/staff-patrolinspection-detail",
+        "pages/staff-patrolinspection-detailSpace/staff-patrolinspection-detailSpace",
+        "pages/staff-patrolinspection-inspectstandardSpace/staff-patrolinspection-inspectstandardSpace",
+        "pages/staff-patrolinspection-pointlist/staff-patrolinspection-pointlist",
+        "pages/staff-patrolinspection-inspectstandard/staff-patrolinspection-inspectstandard",
+        "pages/staff-patrolinspection-inspectresult/staff-patrolinspection-inspectresult",
+        "pages/selection-handler/selection-handler",
+        "pages/ins-point-record/ins-point-record",
+        "pages/quality-inspection-plus/quality-inspection-plus",
+        "pages/quality-inspection-search/quality-inspection-search",
+        "pages/abnormal-ins-order/abnormal-ins-order",
+        "pages/workorder-process/workorder-process",
+        "pages/only-ins-items-detail/only-ins-items-detail",
+        "pages/insJudgePage/insJudgePage",
+        "pages/add-ins-item/add-ins-item",
+        "pages/choose-ins-item/choose-ins-item",
+        "pages/Ins-results/Ins-results",
+        "pages/ins-item-filter/ins-item-filter",
+        "pages/choose-ins-point/choose-ins-point",
+        "pages/selection-position/selection-position",
+        "pages/ins-list/ins-list"
+      ]
+    },
+    {
+      "root": "transport-package",
+      "name": "transportPackage",
+      "pages": [
+        "pages/batch-done/batch-done",
+        "pages/circular-route-details/circular-route-details",
+        "pages/departments/departments",
+        "pages/record-sheet/record-sheet",
+        "pages/scan-code/scan-code",
+        "pages/transport-task-details/transport-task-details",
+        "pages/transport-operation/transport-operation",
+        "pages/transport-selection-handler/transport-selection-handler",
+        "pages/new-transport-process/new-transport-process",
+        "pages/selection-handler/selection-handler",
+        "pages/new-select-delivery-type/new-select-delivery-type",
+        "pages/new-transport-task-details/new-transport-task-details",
+        "pages/selection-position/selection-position",
+        "pages/selection-building-cell/selection-building-cell",
+        "pages/select-department/select-department",
+        "pages/select-delivery-type/select-delivery-type",
+        "pages/new-record-sheet/new-record-sheet",
+        "pages/visitDetail/visitDetail",
+        "pages/index/index",
+        "pages/new-transport-setting/new-transport-setting",
+        "pages/new-filter-order/new-filter-order",
+        "pages/new-doing-order/new-doing-order",
+        "pages/new-bulk-operation/new-bulk-operation"
+      ]
+    },
+    {
+      "root": "workorder-package",
+      "name": "workorderPackage",
+      "pages": [
+        "pages/staff-workorder-detail/staff-workorder-detail",
+        "pages/new-staff-workorder-detail/new-staff-workorder-detail",
+        "pages/create-work-order/create-work-order",
+        "pages/workorder-appendrecord-info/workorder-appendrecord-info",
+        "pages/workorder-process/workorder-process",
+        "pages/workorder-search/workorder-search",
+        "pages/selection-handler/selection-handler",
+        "pages/selection-service-type/selection-service-type",
+        "pages/selection-materials/selection-materials",
+        "pages/index/index",
+        "pages/new-create-workorder/new-create-workorder",
+        "pages/new-workorder-process/new-workorder-process",
+        "pages/new-selection-materials/new-selection-materials",
+        "pages/new-workorder-appendrecord-info/new-workorder-appendrecord-info",
+        "pages/costCenter-selection-materials/costCenter-selection-materials",
+        "pages/new-create-workorder-other/new-create-workorder-other"
+      ]
+    },
+    {
+      "root": "resource-package",
+      "name": "resourcePackage",
+      "pages": [
+        "pages/new-version-index/new-version-index",
+        "pages/new-version-resouce-center/new-version-resouce-center",
+        "pages/new-version-search/new-version-search",
+        "pages/new-version-resouce-list/new-version-resouce-list",
+        "pages/new-version-resouce-choose/new-version-resouce-choose",
+        "pages/new-version-resouce-detail/new-version-resouce-detail",
+        "pages/new-version-my-appointment/new-version-my-appointment",
+        "pages/new-version-attendees/new-version-attendees",
+        "pages/new-version-mangr-index/new-version-mangr-index",
+        "pages/new-version-resouce-mangr-detail/new-version-resouce-mangr-detail",
+        "pages/new-version-mangr-statusList/new-version-mangr-statusList",
+        "pages/new-version-resouce-view-plate/new-version-resouce-view-plate",
+        "pages/new-version-request-resouce/new-version-request-resouce",
+        "pages/new-version-selection-resouce/new-version-selection-resouce"
+      ]
+    },
+    {
+      "root": "code-package",
+      "name": "codePackage",
+      "pages": [
+        "pages/index/index",
+        "pages/scanned-code/scanned-code",
+        "pages/code-detail/code-detail",
+        "pages/record-detail/record-detail",
+        "pages/submitted-record/submitted-record",
+        "pages/submit-record/submit-record",
+        "pages/submit-records/submit-records",
+        "pages/record-search/record-search"
+      ]
+    },
+    {
+      "root": "equipment-package",
+      "name": "equipmentPackage",
+      "pages": [
+        "pages/index/index",
+        "pages/inspectionDetail/inspectionDetail",
+        "pages/inspectionStandard/inspectionStandard",
+        "pages/repairsRecordList/repairsRecordList",
+        "pages/equipmentDetails/equipmentDetails",
+        "pages/inspectionRecordList/inspectionRecordList",
+        "pages/scanCode/scanCode",
+        "pages/upkeepDetail/upkeepDetail",
+        "pages/inspectionStandardKeepup/inspectionStandardKeepup",
+        "pages/selection-handler/selection-handler",
+        "pages/upkeepRecordList/upkeepRecordList",
+        "pages/overhaulRecords/overhaulRecords",
+        "pages/overhaulRecordsAdd/overhaulRecordsAdd",
+        "pages/overhaulRecordsDetailInfo/overhaulRecordsDetailInfo",
+        "pages/equiment-list/equiment-list",
+        "pages/spaceEquipment/spaceEquipment",
+        "pages/maintenanceInspection/maintenanceInspection",
+        "pages/maintainPopup/maintainPopup"
+      ]
+    },
+    {
+      "root": "newEquipment-package",
+      "name": "newEquipmentPackage",
+      "pages": [
+        "pages/index/index",
+        "pages/detail/detail",
+        "pages/inspectionDetail/inspectionDetail",
+        "pages/inspectionStandard/inspectionStandard",
+        "pages/repairsRecordList/repairsRecordList",
+        "pages/equipmentDetails/equipmentDetails",
+        "pages/inspectionRecordList/inspectionRecordList",
+        "pages/upkeepDetail/upkeepDetail",
+        "pages/inspectionStandardKeepup/inspectionStandardKeepup",
+        "pages/selection-handler/selection-handler",
+        "pages/upkeepRecordList/upkeepRecordList",
+        "pages/overhaulRecords/overhaulRecords",
+        "pages/overhaulRecordsAdd/overhaulRecordsAdd",
+        "pages/overhaulRecordsDetailInfo/overhaulRecordsDetailInfo",
+        "pages/spaceEquipment/spaceEquipment",
+        "pages/maintenanceInspection/maintenanceInspection",
+        "pages/maintainPopup/maintainPopup",
+        "pages/selection-type/selection-type"
+      ]
+    },
+    {
+      "root": "upkeep-package",
+      "name": "upkeepPackage",
+      "pages": [
+        "pages/upkeepDetail/upkeepDetail",
+        "pages/upkeepStandard/upkeepStandard",
+        "pages/resultHandle/resultHandle",
+        "pages/selectionHandler/selectionHandler",
+        "pages/upkeepStandardMultiple/upkeepStandardMultiple",
+        "pages/selection-materials/selection-materials",
+        "pages/upkeepStandardRecord/upkeepStandardRecord",
+        "pages/upkeepStandardMultipleRecord/upkeepStandardMultipleRecord"
+      ]
+    },
+    {
+      "root": "new-upkeep-package",
+      "name": "newUpkeepPackage",
+      "pages": [
+        "pages/upkeepDetail/upkeepDetail",
+        "pages/upkeepStandard/upkeepStandard",
+        "pages/resultHandle/resultHandle",
+        "pages/selectionHandler/selectionHandler",
+        "pages/upkeepStandardMultiple/upkeepStandardMultiple",
+        "pages/selection-materials/selection-materials",
+        "pages/upkeepStandardRecord/upkeepStandardRecord",
+        "pages/upkeepStandardMultipleRecord/upkeepStandardMultipleRecord"
+      ]
+    },
+    {
+      "root": "lostFound-package",
+      "name": "lostFoundPackage",
+      "pages": [
+        "pages/index/index",
+        "pages/LostFoundDetail/LostFoundDetail",
+        "pages/AddLostFound/AddLostFound"
+      ]
+    },
+    {
+      "root": "city-manager-package",
+      "name": "cityManagerPackage",
+      "pages": [
+        "pages/index/index",
+        "pages/reportDeatil/reportDeatil",
+        "pages/insReport/insReport",
+        "pages/insReport2/insReport",
+        "pages/myReport/myReport",
+        "pages/selectionHandler/selectionHandler",
+        "pages/handleNow/handleNow"
+      ]
+    },
+    {
+      "root": "accessControl-package",
+      "name": "accessControlPackage",
+      "pages": [
+        "pages/index/index",
+        "pages/accessDetail/accessDetail",
+        "pages/accessQuery/accessQuery",
+        "pages/addAccessApply/addAccessApply",
+        "pages/selectionHandler/selectionHandler",
+        "pages/peoApply/peoApply",
+        "pages/peoOrderApply/peoOrderApply",
+        "pages/peoOutApply/peoOutApply",
+        "pages/peoQuery/peoQuery",
+        "pages/peoActualQuery/peoActualQuery",
+        "pages/selection-building-cell/selection-building-cell",
+        "pages/peoDetail/peoDetail",
+        "pages/qrCodeBlank/qrCodeBlank",
+        "pages/visitApply/visitApply",
+        "pages/visitQuery/visitQuery",
+        "pages/visitDetail/visitDetail",
+        "pages/visitQrCode/visitQrCode",
+        "pages/visitBlank/visitBlank",
+        "pages/mailList/mailList",
+        "pages/personAccessApply/personAccessApply",
+        "pages/personAccessDetail/personAccessDetail",
+        "pages/my-apply-audit/my-apply-audit",
+        "pages/query-all-apply/query-all-apply",
+        "pages/access-record/access-record",
+        "pages/checkCode/checkCode"
+      ]
+    },
+    {
+      "root": "combination-package",
+      "name": "combinationPackage",
+      "pages": [
+        "pages/index/index",
+        "pages/combinationDetail/combinationDetail",
+        "pages/selectionHandler/selectionHandler",
+        "pages/judgePage/judgePage",
+        "pages/overhaulRecordsAdd/overhaulRecordsAdd",
+        "pages/overhaulRecordsDetailInfo/overhaulRecordsDetailInfo",
+        "pages/selection-handler/selection-handler",
+        "pages/inspectionDetail/inspectionDetail",
+        "pages/inspectionStandard/inspectionStandard",
+        "pages/selection-materials/selection-materials",
+        "pages/upkeepStandardRecord/upkeepStandardRecord",
+        "pages/resultHandle/resultHandle",
+        "pages/upkeepDetail/upkeepDetail",
+        "pages/upkeepStandard/upkeepStandard",
+        "pages/upkeepStandardMultiple/upkeepStandardMultiple",
+        "pages/selectionHandler-upkeep/selectionHandler-upkeep",
+        "pages/upkeepStandardMultipleRecord/upkeepStandardMultipleRecord"
+      ]
+    },
+    {
+      "root": "dormitory-manage-package",
+      "name": "dormitoryManagePackage",
+      "pages": [
+        "pages/index/index",
+        "pages/rooms-reservation/rooms-reservation",
+        "pages/selectionHandler/selectionHandler",
+        "pages/rooms-application-search/rooms-application-search",
+        "pages/service-order/service-order",
+        "pages/goods-order/goods-order",
+        "pages/rooms-exchange/rooms-exchange",
+        "pages/handle-rooms/handle-rooms",
+        "pages/rooms-manage/rooms-manage",
+        "pages/apply-search-detail/apply-search-detail",
+        "pages/room-information/room-information",
+        "pages/rooms-search-selection/rooms-search-selection",
+        "pages/select-address/select-address",
+        "pages/select-project/select-project",
+        "pages/building-floors-search/building-floors-search",
+        "pages/room-checking-in/room-checking-in",
+        "pages/room-checkingin-detail/room-checkingin-detail",
+        "pages/room-operation/room-operation",
+        "pages/call-service-jumper/call-service-jumper",
+        "pages/call-service/call-service",
+        "pages/roomstatus-change-application/roomstatus-change-application",
+        "pages/clean-manage/clean-manage",
+        "pages/clean-detail/clean-detail",
+        "pages/room-provisions/room-provisions",
+        "pages/room-detail/room-detail",
+        "pages/inquire/inquire"
+      ]
+    },
+    {
+      "root": "customer-relation-package",
+      "name": "customerRelationPackage",
+      "pages": [
+        "pages/detail/detail",
+        "pages/complaint-advice/complaint-advice",
+        "pages/complaint-advice-detail/complaint-advice-detail",
+        "pages/select-people/select-people",
+        "pages/create-complaint/create-complaint",
+        "pages/customer-assess/customer-assess",
+        "pages/add-assess/add-assess",
+        "pages/assess-class/assess-class",
+        "pages/customer-assess-list/customer-assess-list",
+        "pages/customer-assess-list-details/customer-assess-list-details",
+        "pages/customer-assess-select/customer-assess-select",
+        "pages/assess-standard/assess-standard",
+        "pages/customer-assess-select-cycle/customer-assess-select-cycle",
+        "pages/customer-assess-customize/customer-assess-customize",
+        "pages/customer-assess-customize-dept/customer-assess-customize-dept",
+        "pages/assess-standard-customize/assess-standard-customize",
+        "pages/customer-assess-details-item/customer-assess-details-item",
+        "pages/get-place/get-place",
+        "pages/selection-handler/selection-handler",
+        "pages/add-contacts/add-contacts",
+        "pages/satis-order-list/satis-order-list",
+        "pages/register-approve/register-approve",
+        "pages/contact-search/contact-search",
+        "pages/contact-detail/contact-detail",
+        "pages/add-visit/add-visit",
+        "pages/visit-plan/visit-plan",
+        "pages/visitSearch/visit-search",
+        "pages/visit-search/visit-search",
+        "pages/component-pages/search-handler/search-handler",
+        "pages/visit-object/visit-object",
+        "pages/add-track/add-track",
+        "pages/visit-search-detail/visit-search-detail",
+        "pages/login-auth/login-auth",
+        "pages/get-role/get-role",
+        "pages/visit-plan-search/visit-plan-search",
+        "pages/component-pages/visit-plan-filter/visit-plan-filter",
+        "pages/customer-assess-details-item-simple/customer-assess-details-item-simple",
+        "pages/reporting-details-preview/reporting-details-preview",
+        "pages/reporting-add/reporting-add",
+        "pages/reporting-search/reporting-search",
+        "pages/reporting-search-mine/reporting-search-mine",
+        "pages/reporting-add-details/reporting-add-details",
+        "pages/reporting-search-details/reporting-search-details"
+      ]
+    },
+    {
+      "root": "notice-package",
+      "name": "noticePackage",
+      "pages": [
+        "pages/list/list",
+        "pages/index/index",
+        "pages/publish/publish",
+        "pages/new-detail/new-detail",
+        "pages/new-detail-approve/new-detail-approve",
+        "pages/record/record",
+        "pages/notices/notices",
+        "pages/selection-type/selection-type"
+      ]
+    },
+    {
+      "root": "task-package",
+      "name": "taskPackage",
+      "pages": [
+        "pages/task-detail/task-detail",
+        "pages/forms/forms",
+        "pages/feedback-list/feedback-list",
+        "pages/form-detail/form-detail"
+      ]
+    },
+    {
+      "root": "calendar-package",
+      "name": "calendarPackage",
+      "pages": [
+        "pages/mouth-week-day/mouth-week-day",
+        "pages/new-create-task/new-create-task",
+        "pages/task-details/task-details",
+        "pages/selection-handler/selection-handler",
+        "pages/select-project/select-project",
+        "pages/task-alllist/task-alllist",
+        "pages/edit-task/edit-task",
+        "pages/more-task/more-task"
+      ]
+    },
+    {
+      "root": "iot-package",
+      "name": "iotPackage",
+      "pages": [
+        "pages/index/index",
+        "pages/iot-monitor-list/iot-monitor-list",
+        "pages/iot-monitor-detail/iot-monitor-detail",
+        "pages/iot-sewage/iot-sewage",
+        "pages/iot-meter-read/iot-meter-read",
+        "pages/iot-meter-detail/iot-meter-detail",
+        "pages/iot-alarm-list/iot-alarm-list",
+        "pages/iot-alarm-history/iot-alarm-history",
+        "pages/iot-alarm-detail/iot-alarm-detail",
+        "pages/iot-equipment-list/iot-equipment-list",
+        "pages/iot-equipment-detail/iot-equipment-detail",
+        "pages/iot-energy/iot-energy",
+        "pages/iot-energy-detail/iot-energy-detail",
+        "pages/iot-remoteControl/iot-remoteControl",
+        "pages/iot-remoteControl-detail/iot-remoteControl-detail",
+        "pages/iot-remoteControl-detail-control/iot-remoteControl-detail-control",
+        "pages/iot-search-result/iot-search-result",
+        "pages/iot-scene-equipment-list/iot-scene-equipment-list",
+        "pages/iot-equipment-gateway-list/iot-equipment-gateway-list",
+        "pages/iot-search-result-control/iot-search-result-control"
+      ]
+    },
+    {
+      "root": "contingency-MGN-package",
+      "name": "contingencyMGNPackage",
+      "pages": [
+        "pages/practice-task-info/practice-task-info",
+        "pages/training-record/training-record",
+        "pages/practice-report/practice-report",
+        "pages/contingency-plan/contingency-plan",
+        "pages/subordinate-task/subordinate-task",
+        "pages/check-practice-report/check-practice-report",
+        "pages/contingency-list/contingency-list"
+      ]
+    },
+    {
+      "root": "ceo-mailbox-package",
+      "name": "ceomailboxpackage",
+      "pages": [
+        "pages/mailBoxDetail/mailBoxDetail",
+        "pages/selectionHandler/selectionHandler",
+        "pages/selectedUser/selectedUser"
+      ]
+    },
+    {
+      "root": "trainingRoomManage-package",
+      "name": "trainingRoomManagePackage",
+      "pages": [
+        "pages/calendar-list/calendar-list",
+        "pages/task-detail/task-detail",
+        "pages/beforeAfter-detail/beforeAfter-detail",
+        "pages/unqualified-detail/unqualified-detail",
+        "pages/curriculum-detail/curriculum-detail",
+        "pages/hours-audit/hours-audit"
+      ]
+    },
+    {
+      "root": "ui-package",
+      "name": "uiPackage",
+      "pages": [
+        "pages/ui-demo/ui-demo",
+        "pages/table-demo/table-demo",
+        "pages/basic/basic",
+        "pages/buttons/buttons",
+        "pages/detail/detail",
+        "pages/form/form",
+        "pages/search/search",
+        "pages/calendar/calendar"
+      ]
+    },
+    {
+      "root": "construction-package",
+      "name": "constructionPackage",
+      "pages": [
+        "pages/construction-index/construction-index",
+        "pages/construction-apply/construction-apply",
+        "pages/construction-list/construction-list",
+        "pages/construction-new/construction-new",
+        "pages/construction-details/construction-details",
+        "pages/construction-extension/construction-extension",
+        "pages/closing-application/closing-application",
+        "pages/new-addlog/new-addlog",
+        "components/building-list/building-list",
+        "pages/common-type/common-type",
+        "pages/construction-personnel-details/construction-personnel-details",
+        "pages/construction-personnel-approve/construction-personnel-approve",
+        "pages/apply-information/apply-information",
+        "pages/closecase-detail/closecase-detail",
+        "pages/select-handler/select-handler",
+        "pages/applyforexit/applyforexit",
+        "pages/extension-details/extension-details",
+        "pages/job-appllication/job-appllication",
+        "pages/job-detail/job-detail",
+        "pages/job-staff/job-staff",
+        "pages/job-apply-detail/job-apply-detail",
+        "pages/job-staff-detail/job-staff-detail",
+        "pages/filing-detail/filing-detail"
+      ]
+    },
+    {
+      "root": "smartAccommodation-package",
+      "name": "smartAccommodation-package",
+      "pages": [
+        "pages/rooms-reservation/rooms-reservation",
+        "pages/rooms-application-search/rooms-application-search",
+        "pages/service-order/service-order",
+        "pages/goods-order/goods-order",
+        "pages/rooms-exchange/rooms-exchange",
+        "pages/rooms-continue/rooms-continue",
+        "pages/rooms-manage/rooms-manage",
+        "pages/apply-search-detail/apply-search-detail",
+        "pages/room-information/room-information",
+        "pages/rooms-search-selection/rooms-search-selection",
+        "pages/select-address/select-address",
+        "pages/select-project/select-project",
+        "pages/select-office/select-office",
+        "pages/building-floors-search/building-floors-search",
+        "pages/room-checking-in/room-checking-in",
+        "pages/room-checkingin-detail/room-checkingin-detail",
+        "pages/room-operation/room-operation",
+        "pages/call-service-jumper/call-service-jumper",
+        "pages/call-service/call-service",
+        "pages/roomstatus-change-application/roomstatus-change-application",
+        "pages/clean-manage/clean-manage",
+        "pages/clean-detail/clean-detail",
+        "pages/room-provisions/room-provisions",
+        "pages/room-detail/room-detail",
+        "pages/index/index",
+        "pages/apply-room/apply-room",
+        "pages/checked-out/checked-out",
+        "pages/other-detail/other-detail",
+        "pages/evaluate/evaluate",
+        "pages/qrCode-pay/qrCode-pay",
+        "pages/inquire/inquire",
+        "pages/deduction-detail/deduction-detail"
+      ]
+    },
+    {
+      "root": "statistics-package",
+      "name": "statisticsPackage",
+      "pages": [
+        "pages/led-window/led-window",
+        "pages/orders/orders",
+        "pages/statistics/statistics",
+        "pages/work-order-inquire/work-order-inquire",
+        "pages/medicalwaste-statement/medicalwaste-statement"
+      ]
+    },
+    {
+      "root": "hidden-danger-trouble-package",
+      "name": "hidden-danger-trouble-package",
+      "pages": [
+        "pages/hidden-danger-index/hidden-danger-index",
+        "pages/hidden-danger-list/hidden-danger-list",
+        "pages/hidden-danger-draft/hidden-danger-draft",
+        "pages/hidden-danger-trouble-add/hidden-danger-trouble-add",
+        "pages/hidden-danger-detail/hidden-danger-detail",
+        "pages/hidden-danger-rectification/hidden-danger-rectification",
+        "pages/hidden-danger-success/hidden-danger-success"
+      ]
+    },
+    {
+      "root": "daily-quality-inspection-packge",
+      "name": "daily-quality-inspection-packge",
+      "pages": [
+        "pages/daily-quality-inspection-index/daily-quality-inspection-index",
+        "pages/daily-quality-inspection-add/daily-quality-inspection-add",
+        "pages/daily-quality-inspection-addInfo/daily-quality-inspection-addInfo",
+        "pages/daily-quality-inspection-search-list/daily-quality-inspection-search-list",
+        "pages/daily-quality-inspection-detail/daily-quality-inspection-detail",
+        "pages/daily-quality-inspection-handle/daily-quality-inspection-handle",
+        "pages/daily-quality-inspection-rank/daily-quality-inspection-rank"
+      ]
+    },
+    {
+      "root": "asset-management-package",
+      "name": "assetManagementPackage",
+      "pages": [
+        "pages/index/index"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/login-enter/login-enter": {
+      "network": "all",
+      "packages": [
+        "pollingPackage",
+        "transportPackage",
+        "workorderPackage"
+      ]
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#008C83",
+    "navigationBarTitleText": "明喆集团",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "custom-popup": "/components/custom-popup/custom-popup",
+    "trajectory": "/components/trajectory/trajectory",
+    "more-btn": "/components/more-btn/more-btn",
+    "project-popup": "/components/project-popup/project-popup",
+    "success-popup": "/components/success-popup/success-popup",
+    "custom-input": "/components/custom-input/custom-input",
+    "new-search-box": "/components/new-search-box/new-search-box",
+    "custom-dialog": "/components/custom-dialog/custom-dialog",
+    "custom-tabbar": "/components/custom-tabbar/custom-tabbar",
+    "custom-popup-list": "/components/custom-popup-list/custom-popup-list",
+    "filter-panels": "/components/filter-panels/filter-panels",
+    "filter-tab": "/components/filter-tab/filter-tab",
+    "stepper": "/components/stepper/stepper",
+    "form-item": "/components/form-item/form-item",
+    "detail-item": "/components/detail-item/detail-item",
+    "detail-track": "/components/detail-track/detail-track",
+    "new-upload-files": "/components/new-upload-files/upload-files",
+    "new-record": "/components/new-record/new-record",
+    "calendar-picker": "/components/calendar-picker/calendar-picker",
+    "scroll-bar": "/components/scroll-bar/scroll-bar",
+    "second-scroll-bar": "/components/second-scroll-bar/second-scroll-bar",
+    "custom-table": "/components/custom-table/custom-table",
+    "new-upload-images": "/components/new-upload-images/new-upload-images",
+    "signature-popup": "/components/signature-popup/signature-popup",
+    "new-time-picker": "/components/new-time-picker/new-time-picker",
+    "new-select-handler": "/components/new-select-handler/new-select-handler",
+    "custom-editor": "/components/custom-editor/custom-editor",
+    "custom-modal": "/components/custom-modal/custom-modal",
+    "search-page": "/components/search-page/search-page",
+    "double-factor-modal": "/components/dobule-factor-modal/dobule-factor-modal",
+    "update-password-modal": "/components/update-password-modal/update-password-modal",
+    "custom-picker": "/components/custom-picker/custom-picker",
+    "search-box": "/components/search-box/search-box",
+    "dialog": "/components/dialog/dialog",
+    "calendar": "/components/calendar/calendar",
+    "upload-images": "/components/upload-images/upload-images",
+    "scan-code": "/components/scan-code/scan-code",
+    "custom-popup-textarea": "/components/custom-popup-textarea/custom-popup-textarea",
+    "custom-popup-evaluate": "/components/custom-popup-evaluate/custom-popup-evaluate",
+    "order-list": "/components/order-list/order-list",
+    "upload-files": "/components/upload-files/upload-files",
+    "multiple-popup": "/components/multiple-popup/multiple-popup",
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "select-handler": "/components/select-handler/select-handler",
+    "load-refresh": "/components/load-refresh/load-refresh",
+    "cut-project": "/components/cut-project/cut-project",
+    "record": "/components/record/record",
+    "van-tab": "/lib/vant/tab/index",
+    "van-icon": "/lib/vant/icon/index",
+    "van-tabs": "/lib/vant/tabs/index",
+    "van-popup": "/lib/vant/popup/index",
+    "van-rate": "/lib/vant/rate/index",
+    "van-dialog": "/lib/vant/dialog/index",
+    "van-cell": "/lib/vant/cell/index",
+    "van-cell-group": "/lib/vant/cell-group/index",
+    "van-checkbox": "/lib/vant/checkbox/index",
+    "van-checkbox-group": "/lib/vant/checkbox-group/index",
+    "van-datetime-picker": "/lib/vant/datetime-picker/index",
+    "van-switch": "/lib/vant/switch/index",
+    "van-tree-select": "/lib/vant/tree-select/index",
+    "van-field": "/lib/vant/field/index",
+    "van-picker": "/lib/vant/picker/index",
+    "van-stepper": "/lib/vant/stepper/index",
+    "van-area": "/lib/vant/area/index",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-slideview": "weui-miniprogram/slideview/slideview",
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar",
+    "mp-dialog": "weui-miniprogram/dialog/dialog"
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "connectSocket": 20000,
+    "uploadFile": 20000,
+    "downloadFile": 20000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "useExtendedLib": {
+    "weui": true
+  },
+  "requiredPrivateInfos": [
+    "chooseLocation",
+    "getLocation"
+  ]
+}

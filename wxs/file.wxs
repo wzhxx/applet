@@ -1,0 +1,10 @@
+function getFileType(fileName) {
+    var splitArr = fileName.split('.')
+    var length = splitArr.length
+    var fileType = splitArr[length - 1]
+    return fileType
+}
+
+module.exports = {
+    getFileType: getFileType
+}

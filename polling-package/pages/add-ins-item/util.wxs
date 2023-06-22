@@ -1,0 +1,25 @@
+
+function filterRemark(val){
+    if (val && val.length > 20) {
+        return val.substring(0, 20) + '...'
+      }
+      return val
+}
+function filterUnqualifiedVal(val){
+    if (val && val.length > 15) {
+        return val.substring(0, 15) + '...'
+      }
+      return val
+}
+function filterName(val){
+    console.log(val);
+    if (val && val.length > 44) {
+        return val.substring(0, 44) + '...'
+      }
+      return val
+}
+
+module.exports = {
+    filterRemark:filterRemark,
+    filterUnqualifiedVal:filterUnqualifiedVal
+};

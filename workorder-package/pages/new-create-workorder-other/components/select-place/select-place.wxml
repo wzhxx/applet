@@ -1,0 +1,16 @@
+<custom-popup 
+  isRound
+  position="bottom" 
+  title="选择所属场地" 
+  isShowPopup="{{show}}" 
+  popup_header_class="type_header"
+  customStyle="height: 50%;"
+  bind:hidePopup="close"
+>
+  <view class="type_con">
+    <view class="item {{currPlaceId === item.areaId && 'active'}}" wx:for="{{placeList}}" wx:key="areaId" data-item="{{item}}" bind:tap="handleSelect">
+      <view class="txt">{{item.areaName}}</view>
+      <i class="new-iconfont icon-comfirm themeColor" wx:if="{{currPlaceId === item.areaId}}"></i>
+    </view>
+  </view>
+</custom-popup>

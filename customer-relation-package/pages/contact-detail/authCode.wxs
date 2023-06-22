@@ -1,0 +1,12 @@
+function hasAuthCode(array, code) {
+  var isHas = false;
+  for (var i = 0; i < array.length; ++i) {
+    if (array[i].indexOf(code) > -1) {
+      isHas = true
+    }
+  }
+  return isHas
+}
+module.exports = {
+  hasAuthCode: hasAuthCode
+}
